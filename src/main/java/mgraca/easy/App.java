@@ -1,4 +1,4 @@
-package mgraca;
+package mgraca.easy;
 
 /**
  * Hello world!
