@@ -10,4 +10,4 @@ This project uses a build tool called <a href="https://maven.apache.org/">Maven<
 ## Medium
 
 ## Hard
-4. <a href="https://github.com/matthewgraca/blob/master/leetcode">Median of Two Sorted Arrays</a>
+4. <a href="https://github.com/matthewgraca/leetcode/tree/master/src/main/java/mgraca/hard/MedianOfTwoSortedArrays.java">Median of Two Sorted Arrays</a>
