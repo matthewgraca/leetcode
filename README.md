@@ -6,7 +6,7 @@ Leetcode questions done in Java
 This project uses a build tool called <a href="https://maven.apache.org/">Maven</a> to, allegedly, make the use of dependencies like junit easier to use.
 
 ## Easy
-
+1. <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/TwoSum.java">Two Sum (faster than O(n^2)</a>
 ## Medium
 
 ## Hard
