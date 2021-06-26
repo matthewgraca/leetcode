@@ -1,6 +1,6 @@
 package mgraca.easy;
 
-import java.util.Random;
+import java.util.HashMap;
 
 /*
  * Description: Given an array of integers nums and an integer target, return indices of the two 
@@ -33,80 +33,15 @@ public class TwoSum{
   }
 
   public static int[] fastTwoSum(int[] nums, int target){
-    int term1 = target;
-    int term2 = 0;
-    int i, j;
-    i = j = 0;
-    boolean foundBoth, foundOne, skip;
-    foundBoth = foundOne = skip = false;
-    
-    // search for the two indeces that sum to target
-    while (!foundBoth){
-      // search for term1
-      i = search(nums, term1, false);
-      if (i == -1){
-        foundOne = false;
+    HashMap<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++){
+      if (map.containsKey(target - nums[i])){
+        return new int[]{map.get(target - nums[i]), i};
       }
       else{
-        foundOne = true;
-      }
-      // if term1 was found, search for term2
-      if (foundOne){
-        if (term1 == term2){
-          skip = true;
-        }
-        j = search(nums, term2, skip);
-        if (j == -1){
-          foundBoth = false;
-        }
-        else{
-          foundBoth = true;
-        }
-      }
-      // otherwise, check the next combination of terms
-      else{
-        term1--;
-        term2++;
+        map.put(nums[i], i);
       }
     }
-    // keep index ordering from least -> greatest
-    if (i < j){
-      return new int[]{i, j};
-    }
-    else{
-      return new int[]{j, i};
-    }
-  }
-
-  /**
-   * Searches for the element that contains the target integer
-   * @param arr           the array being searched
-   * @param target        the value being searched for
-   * @param skipDuplicate tells method whether or not to skip the target once
-   * @return if found, return the index of the target; else return -1
-   */
-  private static int search(int[] arr, int target, boolean skipDuplicate){
-    boolean found = false;
-    int i = 0;
-    while (i < arr.length && !found){
-      if (arr[i] == target){
-        if (skipDuplicate){
-          skipDuplicate = false;
-          i++;
-        }
-        else{
-          found = true;
-        }
-      }
-      else{
-        i++;
-      }
-    }
-    if (found){
-      return i;
-    }
-    else{
-      return -1;
-    }
+    return null;
   }
 }
