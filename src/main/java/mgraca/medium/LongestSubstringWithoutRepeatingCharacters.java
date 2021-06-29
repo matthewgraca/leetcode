@@ -2,7 +2,6 @@ package mgraca.medium;
 
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.HashMap;
 
 /*
  * Description: Given a string s, find the length of the longest substring without repeating 
@@ -25,25 +24,5 @@ public class LongestSubstringWithoutRepeatingCharacters{
       longestLength = Math.max(longestLength, queue.size());
     }
     return longestLength;
-  }
-
-  public static int lengthOfLongestSubstringSlidingWindow(String s){
-    /*
-    HashMap<Character, Integer> map = new HashMap<>();
-    int leftWindow = 0;
-    int rightWindow = 0;
-    int longestLength = 0;
-    while (rightWindow < s.length()){
-      
-      while (map.containsKey(s.charAt(rightWindow))){
-        leftWindow++;
-      }
-      map.put(s.charAt(rightWindow), rightWindow);
-      rightWindow++;
-      longestLength = Math.max(longestLength, rightWindow - leftWindow);
-    }
-    return longestLength;
-    */
-    return 0;
   }
 }
