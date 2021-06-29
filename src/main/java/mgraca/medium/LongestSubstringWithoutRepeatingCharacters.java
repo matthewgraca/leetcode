@@ -12,7 +12,7 @@ import java.util.LinkedList;
  *  s consists of English letters, digits, symbols and spaces.
  */
 public class LongestSubstringWithoutRepeatingCharacters{
-  public static int lengthOfLongestSubstringQueue(String s){
+  public static int lengthOfLongestSubstring(String s){
     Queue<Character> queue = new LinkedList<>();
     int longestLength = 0;
     for (int i = 0; i < s.length(); i++){
