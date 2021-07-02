@@ -83,24 +83,12 @@ public class MedianOfTwoSortedArrays{
    * @return the median of the array of ints
    */
   private static double medianOfANonEmptySortedArray(int[] arr){
-    int previous, current;
-    previous = current = arr[0];
-    double median;
-
-    // scan for median
-    int i = 0;
-    while (i <= arr.length / 2){
-      previous = current;
-      current = arr[i];
-      i++;
-    }
     // handle even vs odd cardinality
     if (arr.length % 2 == 0){
-      median = (previous + current) / 2.0;
+      return (arr[arr.length / 2] + arr[arr.length / 2 - 1]) / 2.0;
     }
     else{
-      median = current;
+      return arr[arr.length / 2];
     }
-    return median;
   }
 }
