@@ -71,28 +71,28 @@ public class ZigZagConversion{
     }
     else{
       int n = s.length();
+      // create an array of queues
       Queue<Character>[] charMatrix = new Queue[numRows];
       for (int j = 0; j < numRows; j++){
         charMatrix[j] = new LinkedList<Character>();
       }
-      charMatrix[0].add(s.charAt(0));
-      int i = 1;
-      // replicate the zigzag formation as a 2d array
+      int i = 0;
+      // replicate the zigzag formation like a 2d array
       for (int col = 0; i < n; col++){
         // snake down
         if (col % 2 == 0){
-          for (int row = 1; row < numRows && i < n; row++, i++){
+          for (int row = 0; row < numRows - 1 && i < n; row++, i++){
             charMatrix[row].add(s.charAt(i));
           }
         }
         // snake up
         else{
-          for (int row = numRows - 2; row >= 0 && i < n; row--, i++){
+          for (int row = numRows - 1; row > 0 && i < n; row--, i++){
             charMatrix[row].add(s.charAt(i));
           }
         }
       }
-      // append the solution string
+      // construct the solution string
       for (int row = 0; row < numRows; row++){
         while(!charMatrix[row].isEmpty()){
           solution.append(charMatrix[row].remove());
