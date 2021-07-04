@@ -13,6 +13,10 @@ package mgraca.hard;
  *  0 <= n <= 1000
  *  1 <= m + n <= 2000
  *  -10^6 <= nums1[i], nums2[i] <= 10^6
+ *
+ * Complexity:
+ *  Time:   O(n+m)
+ *  Space:  O(1)
  */
 public class MedianOfTwoSortedArrays{
   public static double findMedianSortedArrays(int[] nums1, int[] nums2){

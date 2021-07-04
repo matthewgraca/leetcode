@@ -11,6 +11,10 @@ package mgraca.medium;
  *  The number of nodes in each linked list is in the range [1, 100].
  *  0 <= Node.val <= 9
  *  It is guaranteed that the list represents a number that does not have leading zeros.
+ *
+ * Complexity
+ *  Time:   O(n+m)
+ *  Space:  O(n+m)
  */
 public class AddTwoNumbers{
   public static ListNode addTwoNumbers(ListNode l1, ListNode l2){

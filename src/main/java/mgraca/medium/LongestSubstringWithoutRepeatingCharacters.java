@@ -10,6 +10,10 @@ import java.util.LinkedList;
  * Constraints:
  *  0 <= s.length <= 5 * 10^4
  *  s consists of English letters, digits, symbols and spaces.
+ *
+ * Complexity:
+ *  Time:   O(n)
+ *  Space:  O(n)
  */
 public class LongestSubstringWithoutRepeatingCharacters{
   public static int lengthOfLongestSubstring(String s){

@@ -6,6 +6,10 @@ package mgraca.medium;
  * Constraints:
  *  1 <= s.length <= 1000
  *  s consist of only digits and English letters (lower-case and/or upper-case)
+ *
+ * Complexity:
+ *  Time:   O(n^2)
+ *  Space:  O(n) 
  */
 public class LongestPalindromicSubstring{
   public static String longestPalindrome(String s){
