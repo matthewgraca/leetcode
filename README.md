@@ -8,6 +8,7 @@ This project uses a build tool called <a href="https://maven.apache.org/">Maven<
 ## Easy
 <p>1 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/TwoSum.java">Two Sum (Maps)</a></p>
 <p>7 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/ReverseInteger.java">Reverse Integer (Math/String)</a></p>
+
 ## Medium
 <p>2 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/medium/AddTwoNumbers.java">Add Two Numbers (Linked Lists)</a></p>
 <p>3 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/medium/LongestSubstringWithoutRepeatingCharacters.java">Longest Substring Without Repeating Characters (Sliding Window)</a></p>
