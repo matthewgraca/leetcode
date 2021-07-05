@@ -41,7 +41,7 @@ public class ReverseInteger{
   /*
    * Let n be the number of digits of the integer.
    * Time:  O(n)
-   * Space: O(n)
+   * Space: O(1) - regardless of the size, the amount of space used is the same; 1 int
    */
   public static int reverseFast(int x){
     int solution = 0;
