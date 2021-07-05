@@ -59,7 +59,7 @@ public class ReverseInteger{
     return solution;
   }
 
-  public static int reverseFastWithoutFunction(){
+  public static int reverseFastWithoutFunction(int x){
     int solution = 0;
     while (x != 0){
       if (solution * 10 / 10 != solution){
