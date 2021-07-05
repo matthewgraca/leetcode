@@ -62,7 +62,7 @@ public class ZigZagConversion{
   }
 
   /*
-   * Time/Space: O(n)
+   * Time/Space: O(n) - while we use something similar to a 2d array, its max size is n, not nxn
    */
   public static String convertV2(String s, int numRows){
     StringBuilder solution = new StringBuilder();
