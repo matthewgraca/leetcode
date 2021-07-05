@@ -9,11 +9,13 @@ package mgraca.easy;
  * Constraints:
  *  -2^(31) <= x <= 2^(31) - 1
  *
- * Complexity:
- *  Time:
- *  Space:
+ * Complexity: see below
  */
 public class ReverseInteger{
+  /*
+   * Time:  O(n)
+   * Space: O(n)
+   */
   public static int reverseSlow(int x){
     // reverse the string representation of the integer
     int solutionInt = 0;
@@ -36,7 +38,40 @@ public class ReverseInteger{
     return solutionInt; 
   }
 
+  /*
+   * Let n be the number of digits of the integer.
+   * Time:  O(n)
+   * Space: O(n)
+   */
   public static int reverseFast(int x){
-    return 0;
+    int solution = 0;
+    while (x != 0){
+      try{
+        solution = Math.multiplyExact(solution, 10);
+        solution += x % 10;
+        x /= 10;
+      }
+      catch(ArithmeticException e){
+        x = 0;
+        solution = 0;
+      }
+    }
+    return solution;
+  }
+
+  public static int reverseFastWithoutFunction(){
+    int solution = 0;
+    while (x != 0){
+      if (solution * 10 / 10 != solution){
+        solution = 0;
+        x = 0;
+      }
+      else{
+        solution *= 10;
+        solution += x % 10;
+        x /= 10;
+      }
+    }
+    return solution;
   }
 }

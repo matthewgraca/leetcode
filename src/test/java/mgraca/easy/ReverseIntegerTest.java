@@ -57,6 +57,7 @@ public class ReverseIntegerTest{
 
   @Test
   public void exampleFast5(){
+    // overflows to negative
     assertTrue(ReverseInteger.reverseFast(1000000003) == 0);
   }
 
@@ -65,4 +66,9 @@ public class ReverseIntegerTest{
     assertTrue(ReverseInteger.reverseFast(-1000000003) == 0);
   }
 
+  @Test
+  public void exampleFast7(){
+    // overflows to positive
+    assertTrue(ReverseInteger.reverseFast(1000000005) == 0);
+  }
 }
