@@ -12,7 +12,7 @@ import java.util.LinkedList;
  *  s consists of English letters, digits, symbols and spaces.
  *
  * Complexity:
- *  Time:   O(n)
+ *  Time:   O(n^2)
  *  Space:  O(n)
  */
 public class LongestSubstringWithoutRepeatingCharacters{
