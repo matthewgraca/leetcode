@@ -11,8 +11,8 @@ package mgraca.easy;
  *  -2^(31) <= x <= 2^(31) - 1
  *
  * Complexity:
- *  Time:
- *  Space:
+ *  Time:   O(n)
+ *  Space:  O(1)
  */
 public class PalindromeNumber{
   public static boolean isPalindrome(int x){
