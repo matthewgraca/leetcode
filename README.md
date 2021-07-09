@@ -19,3 +19,4 @@ This project uses a build tool called <a href="https://maven.apache.org/">Maven<
 
 ## Hard
 <p>4 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/hard/MedianOfTwoSortedArrays.java">Median of Two Sorted Arrays (Divide And Conquer)</a></p>
+<p>10 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/hard/RegularExpressionMatching.java">Regular Expression Matching (String, Dynamic Programming, Recursion)</a></p>
