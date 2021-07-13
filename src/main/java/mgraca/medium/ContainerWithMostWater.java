@@ -18,7 +18,27 @@ package mgraca.medium;
  *  Space:
  */
 public class ContainerWithMostWater{
-  public static int maxArea(int[] height){
+  /*
+   * Time:  O(n^2)
+   * Space: O(1)
+   */
+  public static int naiveMaxArea(int[] height){
+    int largestArea = 0;
+    int minHeight = 0;
+    for (int i = 0; i < height.length; i++){
+      for (int j = i + 1; j < height.length; j++){
+        minHeight = Math.min(height[i], height[j]);
+        largestArea = Math.max(minHeight * (j - i), largestArea);
+      }
+    }
+    return largestArea;
+  }
+
+  /*
+   * Time:  
+   * Space:
+   */
+  public static int fastMaxArea(int[] height){
     return 0;
   }
 }
