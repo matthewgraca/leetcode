@@ -77,4 +77,12 @@ public class ContainerWithMostWaterTest{
     assertTrue(errorMsg, expectedOutput == actualOutput); 
   }
 
+  @Test
+  public void example5Fast(){
+    int[] input = new int[]{2, 3, 4, 5, 18, 17, 6};
+    int expectedOutput = 17;
+    int actualOutput = ContainerWithMostWater.fastMaxArea(input);
+    String errorMsg = "Expected " + expectedOutput + ", returned " + actualOutput;
+    assertTrue(errorMsg, expectedOutput == actualOutput); 
+  }
 }

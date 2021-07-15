@@ -24,21 +24,33 @@ public class ContainerWithMostWater{
    */
   public static int naiveMaxArea(int[] height){
     int largestArea = 0;
-    int minHeight = 0;
+    int lowerHeight = 0;
     for (int i = 0; i < height.length; i++){
       for (int j = i + 1; j < height.length; j++){
-        minHeight = Math.min(height[i], height[j]);
-        largestArea = Math.max(minHeight * (j - i), largestArea);
+        lowerHeight = Math.min(height[i], height[j]);
+        largestArea = Math.max(lowerHeight * (j - i), largestArea);
       }
     }
     return largestArea;
   }
 
   /*
-   * Time:  
-   * Space:
+   * Time:  O(n) 
+   * Space: O(1)
    */
   public static int fastMaxArea(int[] height){
-    return 0;
+    int left = 0;
+    int right = height.length - 1;
+    int area = Math.min(height[left], height[right]) * (right - left);
+    while (left < right){
+      if (height[left] < height[right]){
+        left++;
+      }
+      else{
+        right--;
+      }
+      area = Math.max(area, Math.min(height[left], height[right]) * (right - left));
+    }
+    return area;
   }
 }
