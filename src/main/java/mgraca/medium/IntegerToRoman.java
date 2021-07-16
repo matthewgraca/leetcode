@@ -1,6 +1,5 @@
 package mgraca.medium;
 
-import java.util.HashMap;
 /*
  * Description: Given an integer, convert it to a roman numeral.
  *
