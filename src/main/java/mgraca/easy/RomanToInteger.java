@@ -11,8 +11,9 @@ import java.util.HashMap;
  *  It is guaranteed that s is a valid roman numeral in the range [1, 3999].
  *
  * Complexity:
- *  Time:
- *  Space:
+ *  Let n be the length of the string.
+ *  Time:   O(n)
+ *  Space:  O(1)
  */
 public class RomanToInteger{
   public static int romanToInt(String s){
