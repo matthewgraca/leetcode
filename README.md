@@ -10,6 +10,7 @@ This project uses a build tool called <a href="https://maven.apache.org/">Maven<
 <p>7 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/ReverseInteger.java">Reverse Integer (Math/String)</a></p>
 <p>9 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/PalindromeNumber.java">Palindrome Number (Math)</a></p>
 <p>13 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/RomanToInteger.java">Roman To Integer (Maps, Math, String)</a></p>
+<p>14 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/LongestCommonPrefix.java">Longest Common Prefix (String)</a></p>
 
 ## Medium
 <p>2 - <a href="https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/medium/AddTwoNumbers.java">Add Two Numbers (Linked Lists)</a></p>
