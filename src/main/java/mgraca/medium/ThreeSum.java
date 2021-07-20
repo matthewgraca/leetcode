@@ -16,12 +16,38 @@ import java.util.Arrays;
  *  -10^5 <= nums[i] <= 10^5
  * 
  * Complexity:
- *  Time:
- *  Space:
+ *  See below.
  */
 public class ThreeSum{
-  public static List<List<Integer>> threeSum(int[] nums){
+  /*
+   * Time:  O(n^3)
+   * Space: O(n)
+   */
+  public static List<List<Integer>> naiveThreeSum(int[] nums){
     List<List<Integer>> solution = new ArrayList<>();
+    Arrays.sort(nums);
+    for (int i = 0; i < nums.length; i++){
+      for (int j = i + 1; j < nums.length; j++){
+        for (int k = j + 1; k < nums.length; k++){
+          if (nums[i] + nums[j] + nums[k] == 0){
+            List<Integer> solutionPiece = new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k]));
+            if (!solution.contains(solutionPiece)){
+              solution.add(solutionPiece);
+            }
+          }
+        }
+      }
+    }
     return solution;
+  }
+
+  /*
+   * Time:  
+   * Space:
+   */
+  public static List<List<Integer>> fastThreeSum(int[] nums){
+    List<List<Integer>> solution = new ArrayList<>();
+    Arrays.sort(nums);
+    return null;
   }
 }
