@@ -1,5 +1,9 @@
 package mgraca.easy;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /*
  * Description: Write a function to find the longest common prefix string amongst an array of
  *  strings.
@@ -11,11 +15,15 @@ package mgraca.easy;
  *  strs[i] consists of only lower-case English letters.
  * 
  * Complexity:
- *  Time:
- *  Space:
+ *  See below.
  */
 public class LongestCommonPrefix{
-  public static String naiveLongestCommonPrefix(String[] strs){
+  /*
+   * Let n be the size of the array and m be the size of the smallest string.
+   * Time:  O(n*m)
+   * Space: O(m)
+   */
+  public static String longestCommonPrefix(String[] strs){
     String solution = "";
     if (strs.length == 1){
       solution = strs[0];
@@ -42,9 +50,5 @@ public class LongestCommonPrefix{
       }
     }
     return solution;
-  }
-
-  public static String fastLongestCommonPrefix(String[] strs){
-    return "";
   }
 }
