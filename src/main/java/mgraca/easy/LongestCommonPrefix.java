@@ -1,5 +1,10 @@
 package mgraca.easy;
 
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.List;
+import java.lang.StringBuilder;
+
 /*
  * Description: Write a function to find the longest common prefix string amongst an array of
  *  strings.
@@ -12,36 +17,37 @@ package mgraca.easy;
  * 
  * Complexity:
  *  Let n be the size of the array and m be the size of the smallest string.
- *  Time:   O(n*m)
+ *  Time:   O(n+m)
+ *    -n for copying array into a list, and scanning the list for the min and max
+ *    -m for comparing strings and building the solution
  *  Space:  O(m)
  */
 public class LongestCommonPrefix{
   public static String longestCommonPrefix(String[] strs){
-    String solution = "";
+    StringBuilder solution;
     if (strs.length == 1){
-      solution = strs[0];
+      solution = new StringBuilder(strs[0]);
     }
     else{
-      int i = 0, j = 0;
+      solution = new StringBuilder();
+      // find the largest and smallest strings
+      List<String> list = Arrays.asList(strs);
+      String smallest = Collections.min(list);
+      String largest = Collections.max(list);
+
+      // compare their prefixes
+      int i = 0;
       boolean contScan = true;
-      // scan the words
-      while (contScan && i+1 < strs.length){
-        // compare the letter in this word to the letter in the word next to it
-        if (j < strs[i].length() && j < strs[i+1].length() && 
-            strs[i].charAt(j) == strs[i+1].charAt(j)){
+      while (i < smallest.length() && contScan){
+        if (smallest.charAt(i) == largest.charAt(i)){
+          solution.append(smallest.charAt(i));
           i++;
         }
         else{
           contScan = false;
         }
-        // if the letter has been scanned on all words, check next letter
-        if (i+1 == strs.length && contScan){
-          solution = solution + strs[i].charAt(j);
-          i = 0;
-          j++;
-        }
       }
     }
-    return solution;
+    return solution.toString();
   }
 }
