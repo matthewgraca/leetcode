@@ -3,6 +3,7 @@ package mgraca.medium;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /*
  * Description: Given an integer array nums, return all the triplets 
@@ -69,9 +70,5 @@ public class ThreeSum{
       }
     }
     return solution;
-  }
-
-  public static List<List<Integer>> hashThreeSum(int[] nums){
-    return null;
   }
 }
