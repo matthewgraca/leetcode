@@ -3,7 +3,8 @@ package mgraca.medium;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
 
 /*
  * Description: Given an integer array nums, return all the triplets 
@@ -48,27 +49,25 @@ public class ThreeSum{
   }
 
   /*
-   * Time:  O(n^8logn) 
+   * Time:  O(n^2logn) 
    *  +nlogn for sorting
    *  +n^2logn for comparing each pair against a sorted value in the array using binary search 
-   *  +3 * n^3 choose 2 = n^6, worst case every triple is valid and checked against
+   *  +adding a solution piece is O(1) since the underlying data structure is a map 
+   *    (O(1) to check, O(1) to add)
    * Space: O(n^3)
    *  +worst case, every combination of triples is valid and stored
    */
   public static List<List<Integer>> sortThreeSum(int[] nums){
-    List<List<Integer>> solution = new ArrayList<>();
+    Set<List<Integer>> solution = new HashSet<>();
     Arrays.sort(nums);
     for (int i = 0; i < nums.length; i++){
       for (int j = i + 1; j < nums.length; j++){
         int k = Arrays.binarySearch(nums, j+1, nums.length, -(nums[i]+nums[j]));
         if (k >= 0){
-          List<Integer> solutionPiece = new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k]));
-          if (!solution.contains(solutionPiece)){
-            solution.add(solutionPiece);
-          }
+          solution.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k])));
         }
       }
     }
-    return solution;
+    return new ArrayList<>(solution);
   }
 }
