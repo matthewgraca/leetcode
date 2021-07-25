@@ -1,5 +1,7 @@
 package mgraca.medium;
 
+import java.util.Arrays;
+
 /*
  * Description: Given an array nums of n integers and an integer target, find three integers in 
  *  nums such that the sum is closest to target. Return the sum of the three integers. 
@@ -11,11 +13,29 @@ package mgraca.medium;
  *  -10^4 <= target <= 10^4
  * 
  * Complexity:
- *  Time:
- *  Space:
+ *  See below.
  */
 public class ThreeSumClosest{
-  public static int threeSumClosest(int[] nums, int target){
-    return 0;
+  /*
+   * Let n be the size of the array of integers.
+   * Time:  O(n^3)
+   * Space: O(1)
+   */
+  public static int naiveThreeSumClosest(int[] nums, int target){
+    int minDistance = Math.abs(target - (nums[0] + nums[1] + nums[2]));
+    int bestSum = nums[0] + nums[1] + nums[2]; 
+    for (int i = 0; i < nums.length; i++){
+      for (int j = i + 1; j < nums.length; j++){
+        for (int k = j + 1; k < nums.length; k++){
+          int currSum = nums[i] + nums[j] + nums[k];
+          int currDistance = Math.min(minDistance, Math.abs(target - currSum));
+          if (minDistance > currDistance){
+            minDistance = currDistance;
+            bestSum = currSum;
+          }
+        }
+      }
+    }
+    return bestSum;
   }
 }
