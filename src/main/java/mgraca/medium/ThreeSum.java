@@ -22,30 +22,38 @@ import java.util.HashSet;
  */
 public class ThreeSum{
   /*
-   * Time:  O(n^9)
+   * Time:  O(n^2)
+   *  (adapted from wikipedia's pseudocode on 3sum)
    *  +nlogn for sorting
-   *  +n choose 3 -> compare all combinations of 3 from n items, each with 
-   *    3 * (n^3 choose 2) -> worst case, all solution triples are valid and checked 
-   *    worst case: add 1 check 1, add 1 check 2, add 1 check 3, ..., add 1 check n
+   *  +n^2 through iterating nums with 2 loops
+   *  +n by copying the set onto an arraylist
    * Space: O(n^3)
    *  +n choose 3 -> worst case, every combination of triples is valid and stored
    */
-  public static List<List<Integer>> naiveThreeSum(int[] nums){
-    List<List<Integer>> solution = new ArrayList<>();
-    Arrays.sort(nums);  // ensures the triples are sorted
-    for (int i = 0; i < nums.length; i++){
-      for (int j = i + 1; j < nums.length; j++){
-        for (int k = j + 1; k < nums.length; k++){
-          if (nums[i] + nums[j] + nums[k] == 0){
-            List<Integer> solutionPiece = new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k]));
-            if (!solution.contains(solutionPiece)){
-              solution.add(solutionPiece);
-            }
-          }
+  public static List<List<Integer>> wikiThreeSum(int[] nums){
+    Set<List<Integer>> solution = new HashSet<>();
+    Arrays.sort(nums);  
+    for (int i = 0; i < nums.length - 2; i++){
+      int a = nums[i];
+      int start = i + 1;
+      int end = nums.length - 1;
+      while (start < end){
+        int b = nums[start];
+        int c = nums[end];
+        if (a + b + c == 0){
+          solution.add(new ArrayList<>(Arrays.asList(a, b, c)));
+          start++;
+          end--;
+        }
+        else if (a + b + c > 0){
+          end--;
+        }
+        else{ // (a + b + c < 0)
+          start++;
         }
       }
     }
-    return solution;
+    return new ArrayList<>(solution);
   }
 
   /*
