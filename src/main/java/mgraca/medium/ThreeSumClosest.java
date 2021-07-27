@@ -38,4 +38,43 @@ public class ThreeSumClosest{
     }
     return bestSum;
   }
+
+  /*
+   * Time:  O(n^2)
+   * Space: O(1)
+   */
+  public static int sortThreeSumClosest(int[] nums, int target){
+    Arrays.sort(nums);
+    int minDistance = Math.abs(target - (nums[0] + nums[1] + nums[2]));
+    int bestSum = nums[0] + nums[1] + nums[2]; 
+    for (int i = 0; i < nums.length - 2; i++){
+      int a = nums[i];
+      int start = i + 1;
+      int end = nums.length - 1;
+      while (start < end){
+        int b = nums[start];
+        int c = nums[end];
+        int currDistance = Math.abs(target - (a + b + c));
+        int currSum = a + b + c;
+        // exit if we reaced the target
+        if (currSum == target){
+          return target;
+        }
+        // reduce the sum if we move away from the target
+        else if (currSum > target){
+          end--;
+        }
+        // increase the sum if we're moving towards the target
+        else{
+          start++;
+        }
+        // if the distance improves, set that as the new closest
+        if (currDistance < minDistance){
+          minDistance = currDistance;
+          bestSum = a + b + c;
+        }
+      }
+    }
+    return bestSum;
+  }
 }
