@@ -72,6 +72,7 @@ public class ZigZagConversion{
     else{
       int n = s.length();
       // create an array of queues
+      @SuppressWarnings("unchecked")
       Queue<Character>[] charMatrix = new Queue[numRows];
       for (int j = 0; j < numRows; j++){
         charMatrix[j] = new LinkedList<Character>();
