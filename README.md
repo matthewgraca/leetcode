@@ -4,7 +4,7 @@ Leetcode questions done in Java
 ## Maven
 
 This project uses a build tool called [Maven](https://maven.apache.org/) to make the use of dependencies like junit easier to use.\
-This project runs tests with `mvm test`.
+After installing maven, you can run tests with `mvn test`.
 
 ## Easy
 1 - [Two Sum (Maps)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/TwoSum.java)\
