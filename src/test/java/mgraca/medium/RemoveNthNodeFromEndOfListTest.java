@@ -63,4 +63,26 @@ public class RemoveNthNodeFromEndOfListTest{
       i++;
     }
   }
+
+  @Test
+  public void example4(){
+    // initialize solution
+    ArrayList<Integer> al = new ArrayList<>();
+    al.add(2);
+
+    // initialize problem
+    ListNode head = new ListNode(1, new ListNode(2, null));
+
+    // run solution
+    ListNode sol = RemoveNthNodeFromEndOfList.removeNthFromEnd(head, 2);
+
+    // check solution
+    int i = 0;
+    for (ListNode node = sol; node != null; node = node.next){
+      String msg = "Expected " + al.get(i) + ", returned " + node.val;
+      assertTrue(msg, node.val == al.get(i));
+      i++;
+    }
+  }
+
 }

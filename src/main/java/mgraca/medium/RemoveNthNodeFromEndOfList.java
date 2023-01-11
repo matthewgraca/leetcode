@@ -21,6 +21,7 @@ public class RemoveNthNodeFromEndOfList{
     // set up 2 pointers; one that removes and one that searches
     ListNode root = head;
     ListNode search = head;
+    boolean endFound = false;
 
     // edge cases - 1 node; n guaranteed to be 1 by problem
     if (head.next == null){
@@ -29,11 +30,17 @@ public class RemoveNthNodeFromEndOfList{
 
     // move the search pointer up depending on how far n is
     for (int i = 0; i <= n; i++){
-      search = search.next;
+      // implies n == sz and head is to be removed
+      if (search == null){
+        endFound = true;
+        head = head.next;
+        break;
+      }
+      else
+        search = search.next;
     }
 
     // when the end is reached, root.next is the nth node; remove it
-    boolean endFound = false;
     while (!endFound){
       if (search == null){
         root.next = root.next.next;
