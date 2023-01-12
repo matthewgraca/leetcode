@@ -13,8 +13,10 @@ package mgraca.medium;
  * Can this be done in one pass?
  *
  * Complexity:
- *  Time:
- *  Space:
+ *  Time:   O(n), where n is the number of nodes in the list. We need to 
+ *    find the end of the list to know where we should place our pointer 
+ *    that removes the node we are looking for.
+ *  Space:  O(1), we are only using two pointers no matter the list size.
  */
 public class RemoveNthNodeFromEndOfList{
   public static ListNode removeNthFromEnd(ListNode head, int n){

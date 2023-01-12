@@ -14,8 +14,11 @@ import java.util.Stack;
  *  s consists of parentheses only
  * 
  * Complexity:
- *  Time:
- *  Space:
+ *  Time:   O(n), where n is the size of the input string. We increment 
+ *    through the entire string to check for pairs.
+ *  Space:  O(n), where n is the size of the input string. Worst case, the 
+ *    entire string is made of zero pairs, which we have to increment through, 
+ *    requiring a stack of size n.
  */
 public class ValidParentheses{
   public static boolean isValid(String s){
