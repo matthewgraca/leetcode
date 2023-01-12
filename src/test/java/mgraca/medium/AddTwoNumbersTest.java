@@ -1,4 +1,4 @@
-package mgraca.medium;
+package mgraca;
 
 import static org.junit.Assert.assertTrue;
 

@@ -1,4 +1,4 @@
-package mgraca.medium;
+package mgraca;
 
 /*
  * Description: Given the head of a linked list, remove the neth node from 

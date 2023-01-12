@@ -1,4 +1,4 @@
-package mgraca.medium;
+package mgraca;
 
 /*
  * Definition for a singly-linked list
