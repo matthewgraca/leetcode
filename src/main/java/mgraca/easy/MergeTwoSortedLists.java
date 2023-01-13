@@ -23,8 +23,6 @@ public class MergeTwoSortedLists{
     ListNode temp1 = list1;
     ListNode temp2 = list2;
     ListNode temp3 = null;
-    if (temp1 == null && temp2 == null) // if both empty, there is no order
-      return null;
     if (temp1 == null)  // if list1 is empty, then list2 is the merged order 
       return temp2;
     if (temp2 == null)  // if list2 is empty, then list1 is the merged order
@@ -73,6 +71,20 @@ public class MergeTwoSortedLists{
 
   // recursive version of the solution
   public static ListNode recMergeTwoLists(ListNode list1, ListNode list2){
-    return null;
+    // base case
+    if (list1 == null)  // if list1 is empty, then list2 is the merged order 
+      return list2;
+    if (list2 == null)  // if list2 is empty, then list1 is the merged order
+      return list1;
+
+    // check order
+    if (list1.val < list2.val){
+      list1.next = recMergeTwoLists(list1.next, list2);
+      return list1;
+    }
+    else{
+      list2.next = recMergeTwoLists(list1, list2.next);
+      return list2;
+    }
   }
 }
