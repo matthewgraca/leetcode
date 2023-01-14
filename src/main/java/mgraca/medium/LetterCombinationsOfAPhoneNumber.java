@@ -71,4 +71,38 @@ public class LetterCombinationsOfAPhoneNumber{
     map.put('9', new String[]{"w","x","y","z"});
     return map;
   }
+
+  /*
+   * Recursive, backtracking solution.
+   */
+  public static List<String> recLetterCombinations(String digits){
+    List<String> sol = new ArrayList<>();
+    HashMap<Character, String[]> map = initializePhoneMap();
+    // backtracking returns list with an empty string instead of empty list
+    if (digits.equals(""))
+      return sol;
+    else{
+      backtrack(map, sol, "", 0, digits);
+      return sol;
+    }
+  }
+
+  private static void backtrack(HashMap<Character, String[]> map, 
+                                List<String> sol, String ans, int index, 
+                                String digits){
+    // base case - ans string size matches number of digits
+    if (ans.length() == digits.length()){
+      sol.add(ans);
+      return;
+    }
+
+    // increment through each digit, mapped to n many characters
+    int n = map.get(digits.charAt(index)).length;
+    for (int i = 0; i < n; i++){
+      ans = ans + map.get(digits.charAt(index))[i]; // append letter
+      backtrack(map, sol, ans, index+1, digits);    // append combos from next digit
+      ans = ans.substring(0, ans.length()-1);       // remove appended letter
+    }
+    return;
+  }
 }
