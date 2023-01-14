@@ -11,8 +11,10 @@ import java.util.ArrayList;
  *  1 <= n <= 8
  * 
  * Complexity:
- *  Time:
- *  Space:
+ *  Discussion: both are O(4^(n)/sqrt(n)); my best guess was that this 
+ *    is a binary tree; 2^(n*2), where n*2 is the height of the tree; 
+ *    which would be O(4^n). Since backtracking works by pruning a ton of 
+ *    invalid solutions, the sqrt(n) makes sense.
  */
 public class GenerateParentheses{
   public static List<String> generateParenthesis(int n){
