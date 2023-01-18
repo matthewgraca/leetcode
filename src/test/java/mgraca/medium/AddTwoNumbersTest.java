@@ -1,8 +1,9 @@
-package mgraca;
+package mgraca.medium;
 
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+
+import mgraca.ListNode;
 
 public class AddTwoNumbersTest{
   @Test

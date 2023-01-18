@@ -1,5 +1,6 @@
-package mgraca;
+package mgraca.medium;
 
+import mgraca.ListNode;
 import java.util.List;
 import java.util.ArrayList;
 

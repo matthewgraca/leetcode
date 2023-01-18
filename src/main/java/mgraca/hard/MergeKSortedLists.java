@@ -1,5 +1,6 @@
-package mgraca;
+package mgraca.hard;
 
+import mgraca.ListNode;
 import java.util.PriorityQueue;
 import java.util.Collections;
 

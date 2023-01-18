@@ -1,4 +1,6 @@
-package mgraca;
+package mgraca.medium;
+
+import mgraca.ListNode;
 
 /*
  * Description: You are given two non-empty linked lists representing two non-negative integers. 

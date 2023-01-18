@@ -1,4 +1,6 @@
-package mgraca;
+package mgraca.easy;
+
+import mgraca.ListNode;
 
 /*
  * Description: You are given the heads of two sorted linked lists `list1` 

@@ -1,4 +1,6 @@
-package mgraca;
+package mgraca.medium;
+
+import mgraca.ListNode;
 
 /*
  * Description: Given the head of a linked list, remove the neth node from 

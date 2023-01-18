@@ -1,8 +1,9 @@
-package mgraca;
+package mgraca.medium;
 
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+
+import mgraca.ListNode;
 import java.util.ArrayList;
 
 public class RemoveNthNodeFromEndOfListTest{

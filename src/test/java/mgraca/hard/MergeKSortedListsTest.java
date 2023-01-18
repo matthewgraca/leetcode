@@ -1,7 +1,9 @@
-package mgraca;
+package mgraca.hard;
 
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+
+import mgraca.ListNode;
 import java.util.ArrayList;
 import java.util.Arrays;
 
