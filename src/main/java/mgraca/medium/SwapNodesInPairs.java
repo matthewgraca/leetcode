@@ -12,8 +12,9 @@ import mgraca.ListNode;
  *  0 <= Node.val <= 100
  *
  * Complexity:
- *  Time:
- *  Space:
+ *  Time:   O(n), since it will need to traverse every element in the list
+ *  Space:  O(1), since we do in-place swaps without the creation of an 
+ *    auxiliary list
  */
 public class SwapNodesInPairs{
   public static ListNode swapPairs(ListNode head){

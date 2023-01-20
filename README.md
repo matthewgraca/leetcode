@@ -3,7 +3,10 @@ Leetcode questions done in Java
 
 ## Maven
 
-This project uses a build tool called [Maven](https://maven.apache.org/) to make the use of dependencies like junit easier to use.\
+This project uses a build tool called [Maven](https://maven.apache.org/) to make the use of dependencies like junit easier to use.
+
+For debian-based systems, you can use `sudo apt maven` to download Maven.
+
 After installing maven, you can run tests with `mvn test`.
 
 ## Easy
@@ -13,7 +16,7 @@ After installing maven, you can run tests with `mvn test`.
 13 - [Roman To Integer (Maps, Math, String)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/RomanToInteger.java)\
 14 - [Longest Common Prefix (String)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/LongestCommonPrefix.java)\
 20 - [Valid Parentheses (String, Stack)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/ValidParentheses.java)\
-21 - [Merge Two Sorted Lists (Linked List, Recursion](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/MergeTwoSortedLists.java)
+21 - [Merge Two Sorted Lists (Linked List, Recursion)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/easy/MergeTwoSortedLists.java)
 
 ## Medium
 2 - [Add Two Numbers (Linked Lists)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/medium/AddTwoNumbers.java)\
@@ -28,8 +31,10 @@ After installing maven, you can run tests with `mvn test`.
 17 - [Letter Combinations of a Phone Number (Maps, String, Backtracking)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/medium/LetterCombinationsOfAPhoneNumber.java)\
 18 - [Four Sum (Array, Two Pointers, Sorting)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/medium/FourSum.java)\
 19 - [Remove Nth Node From End of List (Linked List, Two Pointers)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/medium/RemoveNthNodeFromEndOfList.java)\
-21 - [Generate Parentheses (String, Dynamic Programming, Backtracking)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/medium/GenerateParentheses.java)
+22 - [Generate Parentheses (String, Dynamic Programming, Backtracking)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/medium/GenerateParentheses.java)\
+24 - [Swap Nodes in Pairs (Linked List, Recursion)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/medium/SwapNodesInPairs.java)
 
 ## Hard
 4 - [Median of Two Sorted Arrays (Divide And Conquer)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/hard/MedianOfTwoSortedArrays.java)\
-10 - [Regular Expression Matching (String, Dynamic Programming, Recursion)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/hard/RegularExpressionMatching.java) **UNFINISHED**
+10 - [Regular Expression Matching (String, Dynamic Programming, Recursion)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/hard/RegularExpressionMatching.java) **UNFINISHED**\
+23 - [Merge k Sorted Lists (Linked List, Divide and Conquer, Priority Queue, Merge Sort)](https://github.com/matthewgraca/leetcode/blob/master/src/main/java/mgraca/hard/MergeKSortedLists.java)
