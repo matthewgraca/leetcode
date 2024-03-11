@@ -36,4 +36,8 @@ Time: n to create the dictionary, n to conduct n searches
     - O(n)
 Space: n for the dictionary
     - O(n)
+
+Pattern: I think the idea here is that when you are looking for combinations, 
+you can boil it down to a searching problem. So if you can identify what 
+exactly you are searching for, then you can make into a dictionary problem.
 '''
