@@ -38,6 +38,8 @@ This is better than a naive approach because despite it being costly to
 create the dictionaries, the compare portion is really fast, so it makes 
 up for the cost; O(n) for n letters, versus O(n^2) for n letters.
 
+Pattern: when you see "compare", think dictionaries.
+
 Time: 2 * n for the creation of the two dictionaries, n for the comparison 
 between the two dictionaries.
     - O(n)
