@@ -15,3 +15,19 @@ class ValidAnagramTest(unittest.TestCase):
         actual = Solution.isAnagram(arg1, arg2)
         expected = False 
         self.assertEqual(actual, expected)
+
+    def test_example1a(self):
+        arg1 = "anagram"
+        arg2 = "nagaram"
+        actual = Solution.isAnagram2(arg1, arg2)
+        expected = True
+        self.assertEqual(actual, expected)
+
+    def test_example2a(self):
+        arg1 = "rat"
+        arg2 = "car"
+        actual = Solution.isAnagram2(arg1, arg2)
+        expected = False 
+        self.assertEqual(actual, expected)
+
+
