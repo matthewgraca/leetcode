@@ -3,7 +3,8 @@
 ```bash
 python3 -m unittest -v \path\to\your\test\file\:3
 ```
-## patterns
+## patterns and notes
+**Comprehensive notes will be updated onto my private obsidian repo, so these serve more as quick jots**
 ### arrays and hashing
 - If you do a TON of comparing and searching, hashing should be your first thought
 
