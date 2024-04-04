@@ -16,3 +16,10 @@ class TopKFrequentElementsTest(unittest.TestCase):
        actual = Solution.topKFrequent(nums, k)
        expected = [1]
        self.assertEqual(actual, expected)
+
+    def test_example3(self):
+        nums = [1,1,1,1,1,2,2,3,3,3,4,4]
+        k = 2
+        actual = Solution.topKFrequent(nums, k)
+        expected = [1,3]
+        self.assertEqual(actual, expected)
