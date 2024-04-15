@@ -16,5 +16,11 @@ class Solution:
                     return False
                 else:
                     stack.pop()
-        # if parentheses remain unmatched, return false
+        # if parentheses remain unpaired in the stack, return false
         return len(stack) == 0 
+'''
+time: o(n) -- traverses the s string
+space: o(n) -- worst case is a string with only open parentheses, fills stack up to n
+
+cute little connection with hashmaps
+'''
