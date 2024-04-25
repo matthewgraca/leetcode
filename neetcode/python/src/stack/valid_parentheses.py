@@ -1,26 +1,16 @@
 class Solution:
     def isValid(s: str) -> bool:
         stack = []
-        pairs = {
-            ")": "(",
-            "]": "[",
-            "}": "{"
-        }
-
+        pairs = {"(": ")", "{": "}", "[": "]"}
         for p in s:
-            if p in pairs.values(): 
+            # add open parentheses
+            if p in pairs:
                 stack.append(p)
             else:
-                # no matching open parenthesis found
-                if not stack or stack[-1] != pairs[p]:
-                    return False
-                else:
+                # check if matching open pair is on top of stack
+                if stack and pairs[stack[-1]] == p:
                     stack.pop()
-        # if parentheses remain unpaired in the stack, return false
-        return len(stack) == 0 
-'''
-time: o(n) -- traverses the s string
-space: o(n) -- worst case is a string with only open parentheses, fills stack up to n
-
-cute little connection with hashmaps
-'''
+                else:
+                    return False
+        # if any parentheses remain, it has not made a valid pair 
+        return len(stack) == 0
