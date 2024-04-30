@@ -27,15 +27,15 @@ class Solution:
     # iterative, non-stack based solution
     def reorderList(self, head: ListNode) -> None:
         # split the list in two, demarcated by the left pointer
-        left, right = head, head.next
-        while right and right.next:
-            left = left.next
-            right = right.next.next
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
 
         # reverse the upper half of the list
         # taken from Reverse Linked List problem
-        upper = left.next
-        prev = left.next = None
+        upper = slow.next
+        prev = slow.next = None
         while upper:
             temp = upper.next
             upper.next = prev
