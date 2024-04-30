@@ -6,6 +6,21 @@ class Solution:
 
     # no stack, single pass, slow-fast ptr solution
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        # set up a slow pointer that reaches the n+1th node when fast hits the end
+        dummy = ListNode(0, head) 
+        slow = dummy
+        fast = head
+        for i in range(n):
+            fast = fast.next
+        while fast:
+            slow = slow.next
+            fast = fast.next
+
+        # remove nth node by stitching n+1 to n-1
+        slow.next = slow.next.next
+        
+        # head may be removed; return dummy.next
+        return dummy.next 
 
     # stack-based, iterative solution
     def removeNthFromEnd1(self, head: ListNode, n: int) -> ListNode:
