@@ -48,4 +48,10 @@ So this problem is actual verifiable bullshit. here's the rub:
             "0", a multiple of "lambda", which is the beginning of the cycle. 
         - seems like complicated group/graph theory crap that shouldn't be asked in an 
             interview LMAO
+        - time complexity is O(lambda + mu). lambda is the period (num of iterations 
+            of the first loop) and mu is the number of periods lambda needed to get 
+            to the multiple of 2v s.t. 2v = 0. lol
+        - also, i figured out why the topics include fing bit manipulation... 
+            there's another algo called brent's that uses powers of two to guide 
+            the tortise and hare positions... like wtf...??
 '''
