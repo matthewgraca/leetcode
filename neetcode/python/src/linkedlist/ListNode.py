@@ -10,12 +10,11 @@ class ListNode:
 
     # takes a list and converts it into a linked list
     def linkedListOf(self, arr: List[int]) -> ListNode:
-        head = temp = ListNode(arr[0])
-        for i in range(1, len(arr)):
-            a = ListNode(arr[i])
-            temp.next = a
+        head = temp = ListNode(0)
+        for val in arr:
+            temp.next = ListNode(val)
             temp = temp.next
-        return head
+        return head.next
     
     # takes a linked list and converts it into a list
     def listOf(self, head: ListNode):
