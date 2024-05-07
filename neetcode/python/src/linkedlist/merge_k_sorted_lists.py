@@ -92,6 +92,7 @@ option 0: merge each list
     - = (1m + 2m + ... (k-1)m) + (m + m + ... m)
     - = m(1 + 2 + .. + k-1) + km
     - = m(((k-1)/2)(k)) + km
+    - == mk^2 + km
     - == mk^2
 - O(1)
     - simple stitching nodes
@@ -126,8 +127,8 @@ which occurs logk times)
 (compare this to option 0; folding 1->2=1, then 1->3=1, then 1->k. each merge is n times,
 so for k lists that nk time)
 
-1. get a list, merge with next list
-2. continue until one list remains
+1. merge all pairs of sublists. half the number of lists will remain.
+2. continue merging until one list remains
 - O(mklogk) = O(nlogk)
     - m+m + m+m + ... m+m + 2m+2m + ... + 2m+2m + 4m+4m + ... + 4m+4m ... m(k/2) + m(k/2) = 
     - = km + (k/2)2m + ... + (k/k)km
@@ -136,4 +137,10 @@ so for k lists that nk time)
     - = km*logk
 - O(1): just stitching references together
 - only advantage is it's parallelizable. the heap is preferable in terms of ease
+- I realized what made this tough was realizing what mergesort actually does. 
+The has the same number of merges as the O(kn) solution; the difference between 
+the two is the COST of each merge.
+    - mk^2 + km compares vs mklogk, or nk + n vs nlogk compares
+    - it is VITALLY important to merge smaller lists together first; merging big and 
+        small lists is bounded by the BIG list by number of compares!
 '''
