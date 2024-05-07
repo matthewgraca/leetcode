@@ -39,3 +39,16 @@ class Solution:
 
         return prev
 
+'''
+like this solution b/c we actually repurpose code
+also takes advantage of the iterative/recursive solution;
+prev will be the head of the reversed list, but head remained
+the head of the old list -- since the list is reversed, that means
+the head is now the tail, so we can actually attach it to the new group
+via recursion
+
+time: o(n)
+    - n to reverse the list
+    - n to scout and check if groups are valid
+space: O(1)
+'''
