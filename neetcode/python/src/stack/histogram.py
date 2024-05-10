@@ -2,47 +2,29 @@ from typing import List
 
 class Solution:
     def largestRectangleArea(heights: List[int]) -> int:
-        # contains (border, height) 
-        # e.g. (0,6) means height 6 goes back to idx 0
+        # stack will contain [start index, height]
+        # where the height is the height and the index this height goes back to
+        # e.g. (0,6) means the height of 6 goes back to the 0th index
         stack = []
         maxArea = 0
-        minHeight = float('inf')
-        for i,height in enumerate(heights):
-            if not stack:
-                stack.append((i,height))
-            elif height <= stack[-1][1]:
-                # pop and compute areas until smaller border is reached
-                left = 0
-                while stack and height <= stack[-1][1]:
-                    left, prevHeight = stack.pop()
-                    maxArea = max(maxArea, prevHeight * (i - left))
-                stack.append((left,height))
-            else:
-                stack.append((i,height)) 
+        # heights.append(0) # see comments at end of functions
 
-        # compute remaining areas
-        n = len(heights)
+        for i, h in enumerate(heights):
+            start = i
+            # if the height in the array is decreasing, retroactively calculate
+            # the areas utilizing all the larger rectangles
+            while stack and h <= stack[-1][1]:
+                start, height = stack.pop()
+                # area = smallest height of sequence * (end index - start index)
+                maxArea = max(maxArea, height * (i - start))
+            stack.append((start, h))
+
+        # necessary for monotonically increasing heights
+        # it is also possible to append 0 to heights as a sentinel value,
+        # guaranteeing a decreasing value at the end. But that just obfuscates
+        # the code, with no meaningful performance or readability boost
         while stack:
-            left, height = stack.pop()
-            maxArea = max(maxArea, height * (n - left))
+            start, height = stack.pop()
+            maxArea = max(maxArea, height * (len(heights) - start))
 
         return maxArea
-'''
-the idea here is saving higher and higher heights (monotonic stack).
-When we see a height that is smaller, we go back to compute the max areas 
-from those heights
-
-The trick here is the data in the stack. we need to push in the height 
-and the index; but the index is not where the height bar is -- rather, it 
-is a value that tell us "how far back this height goes". This is necessary 
-because when the function is decreasing, the previous heights also decline 
-to match the current smaller height <-- this is reminiscent of the fleet problem.
-
-The biggest issue here is I thought this was a sl window / two pointer problem...
-it's honestly hard to differentiate stack problems like this and those 
-problems, especially sliding window. because we really are evaluating a 
-window(subset) of values, just with the added idea of "saving mins" or maxes.
-
-time - n to append and pop from stack and to traverse the input array
-space - n space for the stack
-'''
