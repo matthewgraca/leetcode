@@ -10,10 +10,10 @@ class Solution:
         start, end = 0, len(nums)-1
         while start <= end:
             mid = (end + start) // 2
-            # check upper half
+            # target in upper half; check upper half
             if target > nums[mid]:
                 start = mid + 1
-            # check lower half
+            # target in lower half; check lower half
             elif target < nums[mid]:
                 end = mid - 1
             else:
@@ -36,9 +36,3 @@ class Solution:
         # right branch: target is in lower array
         if target < nums[mid]:
             return self.recursive_search(nums, target, start, mid-1)
-'''
-implemented both iterative and recursive solutions, god i suck at recursion
-
-time: each iteration, the problem space is cut in half -- logn
-space: no extra space is used. O(1)
-'''
