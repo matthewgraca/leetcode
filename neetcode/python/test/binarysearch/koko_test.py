@@ -29,3 +29,10 @@ class KokoTest(unittest.TestCase):
         actual = Solution().minEatingSpeed(piles, h)
         expected = 2
         self.assertEqual(actual, expected)
+
+    def test_example5(self):
+        piles = [312884470]
+        h = 968709470
+        actual = Solution().minEatingSpeed(piles, h)
+        expected = 1
+        self.assertEqual(actual, expected)
