@@ -4,89 +4,52 @@ class Solution:
     def __init__(self):
         pass
 
-    '''
-    l0, l1, l2, ... ln-1, ln
-    l0, ln, l1, ln-1, l2, ln-2, ...
-    '''
-    # recursive solution
-    # using terms from clrs book instead of (base, recursive step) 
-    def reorderListR(self, head: ListNode) -> None:
-        self.recursiveReorder(head, head)
-
-    def recursiveReorder(self, mid: ListNode, right: ListNode) -> ListNode:
-        # conquer 
-        if right.next == None:
-            return right
-        if right.next.next == None:
-            return right.next
-        # divide
-        # returns the right value at the end of the list
-        right = self.recursiveReorder(mid.next, right.next.next)
-        # combine
-        
-    # iterative, non-stack based solution
-    def reorderList(self, head: ListNode) -> None:
-        # split the list in two, demarcated by the left pointer
-        slow, fast = head, head.next
+    def reorderList(self, head: ListNode)-> None:
+        # get a pointer to the middle of the list, in "slow"
+        slow = fast = head
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-
-        # reverse the upper half of the list
-        # taken from Reverse Linked List problem
-        upper = slow.next
-        prev = slow.next = None
-        while upper:
-            temp = upper.next
-            upper.next = prev
-            prev = upper 
-            upper = temp
-
-        # attach each node from lower list to upper list
-        # lower -> lower list, upper -> upper list
+        
+        # create a separate, second list of the upper nodes reversed, in "prev"
+        prev, curr = None, slow.next
+        slow.next = None
+        while curr:
+            after = curr.next
+            curr.next = prev
+            prev = curr
+            curr = after
+        
+        # connect the lower portion of the list with the upper portion:
+        # lower_i -> upper_i -> lower_i+1
         lower, upper = head, prev
         while upper:
-            lowertmp, uppertmp = lower.next, upper.next
+            lowerTemp, upperTemp = lower.next, upper.next
             lower.next = upper
-            upper.next = lowertmp 
-            lower, upper = lowertmp, uppertmp 
-            
-    # iterative, stack-based solution
-    def reorderListIt(self, head: ListNode) -> None:
-        # traverse list, where the right pointer points to the final node
-        # and the mid pointer points to the middle node (ceiling(n/2))
-        # done by moving right twice while moving mid once per iteration 
-        mid = right = left = head
-        while right.next != None:
-            mid = mid.next
-            # prevent right from going past the end
-            if right.next.next == None:
-                right = right.next
-            else:
-                right = right.next.next
+            upper.next = lowerTemp
+            lower, upper = lowerTemp, upperTemp
 
-        # push all node pointers from mid to end into a stack
-        stack = []
-        while mid:
-            stack.append(mid)
-            mid = mid.next
+    # stack-based solution
+    def reorderListStack(self, head: ListNode) -> None:
+        # get a pointer to the middle of the list, in "slow"
+        slow = fast = head
+        while fast and fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        # push upper half of list into a stack
+        st = []
+        slow = slow.next
+        while slow:
+            st.append(slow)
+            slow = slow.next
 
-        # reattach
-        temp = head
-        while temp.next:
-            temp = temp.next
-            right = stack.pop()
-            left.next = right 
-            right.next = temp
-            left = temp 
-            if temp.next == right:
-                temp.next = None
-
-'''
-not even gonna attempt the recursive version
-
-biggest idea is two pointers -- slow and fast, where fast goes 2x slow so slow ends up in the middle
-
-the trick is that you can reverse the second half, then attach nodes iteratively
-o(n) time, no space
-'''
+        # attach nodes from stack
+        front = head
+        while st:
+            back = st.pop()
+            temp = front.next
+            front.next = back
+            back.next = temp
+            front = temp
+        front.next = None
