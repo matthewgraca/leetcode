@@ -28,8 +28,8 @@ class Solution:
             head.next = self.mergeTwoListsRecursive(list1, list2.next)
         return head
 
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        dummy = temp = ListNode(float(-inf))
+    def mergeTwoLists(self, list1: ListNode, list2: ListNode) -> ListNode:
+        dummy = temp = ListNode(float('-inf'))
         # check through list1 and list2 values
         while list1 and list2:
             # move temp pointer to list with the smaller value
