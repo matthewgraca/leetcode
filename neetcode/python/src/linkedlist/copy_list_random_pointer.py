@@ -5,39 +5,23 @@ class Solution:
         pass
 
     def copyRandomList(self, head: Node) -> Node:
-        # return null for empty list
-        if head == None:
-            return None
+        # create map between the original and the copy
+        originalCopyMap = {}
+        dummy = copy = Node(-1)
+        temp = head
+        while temp:
+            # create copy, initializing the next pointer
+            copy.next = Node(temp.val)
+            copy = copy.next
 
-        # first pass: make a basic copy of the list, and save them in a dict
-        # dict = {original node, copy node}
-        copy = dict()
-        temporg = head
-        tempcopy = Node(0)
+            # map original to copy
+            originalCopyMap[temp] = copy
+            temp = temp.next
+        
+        # get the random pointers from the original and what they should point to for the copy
+        temporg, tempcopy = head, dummy.next
         while temporg:
-            # put copy in dictionary 
-            temp = Node(temporg.val)
-            copy[temporg] = temp
+            tempcopy.random = originalCopyMap[temporg.random] if temporg.random else None
+            temporg, tempcopy = temporg.next, tempcopy.next
 
-            # copy original next nodes
-            tempcopy.next = temp
-            tempcopy = tempcopy.next
-
-            temporg = temporg.next
-
-        # using the dict, the original node random pointer gives the key to 
-        # what the copy node should point to for it's own list
-        temporg = head
-        while temporg:
-            if temporg.random == None:
-                copy[temporg].random = None
-            else:
-                copy[temporg].random = copy[temporg.random]
-            temporg = temporg.next
-        return copy[head] 
-'''
-freaky, this problem is cute. managed to solve it at great cost
-
-o(n) for copy, o(n) for search and random ptr attachment
-o(n) space for hm
-'''
+        return dummy.next
