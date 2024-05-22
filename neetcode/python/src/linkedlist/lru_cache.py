@@ -1,65 +1,55 @@
-# double linked list
+# doubly linked list, but with data as a key-value pair
 class Node:
-    def __init__(self, key, val):
-        self.key, self.val = key, val
+    def __init__(self, key: int, value: int):
+        self.key, self.val = key, value
         self.prev, self.next = None, None
 
+# basically a deque (linked list) with a map for O(1) search
 class LRUCache:
-    # initialize cache with positive size capacity
-    # capacity = [1,3000]
-    # head = lru, tail = mru
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.keyNodeMap = {}
-        # head = left bound, tail = right bound. all nodes belong in between
-        self.head, self.tail = Node(-1,-1), Node(-1, -1) 
+        self.cachemap = {} # {key, Node}
+        self.head, self.tail = Node(-1, -1), Node(-1, -1) # two dummy nodes
         self.head.next, self.tail.prev = self.tail, self.head
 
-    # return value of key. If key doesn't exist, return -1
-    # get == used, so update the node as mru
-    # key = [0, 10000]
-    # goal: avg O(1) time
     def get(self, key: int) -> int:
-        # update to mru
-        if key in self.keyNodeMap:
-            self.remove(self.keyNodeMap[key])
-            self.insert(self.keyNodeMap[key])
-            return self.keyNodeMap[key].val
-        return -1
-
-    # 1. update the value of key if it exists.
-    # 2. otherwise, add the key-value pair to the cache
-    # 3. if the number of keys exceeds capacity:
-    #   - evict the least recently used key
-    # key = [1,10000], value = [0,100000]
-    # goal: avg O(1) time
+        if key not in self.cachemap:
+            return -1
+        else:   
+            # update position in cache
+            curr = self.cachemap[key]
+            self.remove(curr)
+            self.insert(curr)
+            return curr.val
+        
     def put(self, key: int, value: int) -> None:
-        if key in self.keyNodeMap:
-            self.remove(self.keyNodeMap[key])
-        self.keyNodeMap[key] = Node(key, value)
-        self.insert(self.keyNodeMap[key])
-
-        if len(self.keyNodeMap) > self.capacity:
-            lru = self.head.next
-            self.remove(lru)
-            del self.keyNodeMap[lru.key]
-
-    # removes a given node
-    def remove(self, curr: Node) -> None:
-        before, after = curr.prev, curr.next
-        before.next, after.prev = after, before 
-
-    # adds a given node to mru (before tail)
-    def insert(self, node: Node) -> None:
-        # attach node before tail and given node together
-        before = self.tail.prev
-        before.next, node.prev = node, before
-        # attach given node and tail together 
-        node.next, self.tail.prev = self.tail, node
-'''
-basically got screwed by implementation details. the idea of having a 
-tail and head pointer is not new, but using the tail and head ptrs 
-as actual boundaries, with their own dummy nodes? furthermore, the
-every node being placed IN BETWEEN the head/tail ptrs?
-never seen that pattern before.
-'''
+        if key in self.cachemap:
+            curr = self.cachemap[key]
+            self.remove(curr)
+            del self.cachemap[key]
+            self.capacity += 1
+        # if capacity hits 0:
+        if not self.capacity:
+            temp = self.head.next
+            self.remove(temp)
+            del self.cachemap[temp.key]
+            self.capacity += 1
+        
+        # add and update cachemap
+        temp = Node(key, value)
+        self.insert(temp)
+        self.cachemap[key] = temp
+        self.capacity -= 1
+    
+    # removes a node from the list
+    def remove(self, curr: Node):
+        curr.prev.next = curr.next
+        curr.next.prev = curr.prev
+    
+    # places a node at the end of the list (the node before tail)
+    def insert(self, curr: Node):
+        prev = self.tail.prev
+        prev.next = curr
+        curr.prev = prev
+        curr.next = self.tail
+        self.tail.prev = curr
