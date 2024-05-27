@@ -36,6 +36,7 @@ class TreeNode:
         self.bfs(root, res)
         return res
 
+    # simple dfs, no cycles
     def dfs(self, node: TreeNode, res: List[int]):
         # base case: leaf node
         if not node:
@@ -43,11 +44,10 @@ class TreeNode:
 
         res.append(node.val)
         # go left; when exhausted, go right
-        if node.left:
-            self.dfs(node.left, res)
-        if node.right:
-            self.dfs(node.right, res)
+        self.dfs(node.left, res)
+        self.dfs(node.right, res)
 
+    # simple bfs, no cycles
     def bfs(self, node: TreeNode, res: List[int]):
         # empty case
         if not node:
