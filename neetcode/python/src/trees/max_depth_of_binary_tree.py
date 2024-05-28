@@ -5,11 +5,28 @@ class Solution:
         pass
 
     def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0 
+
+        st = [(root,1)]
+        maxDepth = 0
+        while st:
+            node, depth = st.pop()
+            maxDepth = max(maxDepth, depth)
+            if node.left:
+                st.append((node.left, depth+1))
+            if node.right:
+                st.append((node.right, depth+1))
+
+        return maxDepth 
+
+
+    def maxDepthR(self, root: TreeNode) -> int:
         if root is None:
             return 0
 
-        leftTreeDepth = 1 + self.maxDepth(root.left)
-        rightTreeDepth = 1 + self.maxDepth(root.right)
+        leftTreeDepth = 1 + self.maxDepthR(root.left)
+        rightTreeDepth = 1 + self.maxDepthR(root.right)
 
         return max(leftTreeDepth, rightTreeDepth)
 
