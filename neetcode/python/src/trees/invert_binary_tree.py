@@ -20,5 +20,5 @@ class Solution:
 '''
 complexity:
     time: each node is visited once: so if there are n nodes, the answer is O(n)
-    space: O(h), where h is the depth of the tree, or h nodes in memory for the deepest node
+    space: O(n) for a degenerate binary tree (every node has just one left child, tantamount to a linked list)
 '''

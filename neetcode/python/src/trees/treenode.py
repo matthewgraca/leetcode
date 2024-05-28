@@ -18,7 +18,11 @@ class TreeNode:
         return self.buildTree(0, nodelist)
 
     def buildTree(self, i: int, nodelist: List[int]) -> TreeNode:
+        # end of tree
         if i >= len(nodelist):
+            return None
+        # no children for prev node
+        if nodelist[i] is None:
             return None
 
         return TreeNode(
