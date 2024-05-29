@@ -15,7 +15,12 @@ class TreeNode:
     #       /   \
     #     2i+1 2i+2
     def treeOf(self, nodelist: List[int]) -> TreeNode:
-        return self.buildTree(0, nodelist)
+        if isinstance(nodelist, int):
+            return TreeNode(nodelist)
+        if isinstance(nodelist, list):
+            return self.buildTree(0, nodelist)
+        return None
+
 
     def buildTree(self, i: int, nodelist: List[int]) -> TreeNode:
         # end of tree

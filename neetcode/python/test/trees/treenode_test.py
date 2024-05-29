@@ -50,3 +50,10 @@ class TreeNodeTest(unittest.TestCase):
         self.assertTrue(node.right.left.right is None)
         self.assertTrue(node.right.right.left is None)
         self.assertTrue(node.right.right.right is None)
+
+    def test_intAsNode(self):
+        node = 1
+        root = TreeNode().treeOf(node)
+        self.assertEqual(root.val, 1)
+        self.assertTrue(root.left is None)
+        self.assertTrue(root.right is None)
