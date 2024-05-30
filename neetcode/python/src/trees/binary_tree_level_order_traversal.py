@@ -29,3 +29,17 @@ class Solution:
             res.append(temp)
 
         return res
+'''
+I like this solution more than neetcodes; it's the same but I kind of see the solution better
+
+Time:
+    - n nodes traversed
+    - push a total of n nodes through the queue and the level list
+    - Total: O(n)
+
+Space:
+    - queue and list have, at most, only the the current level's nodes contained.
+        given the binary tree, only 2 nodes in the list at a time
+        - so no matter how large the binary tree is, the queue and the level list doesn't change
+    - O(1) for only constant space used. not including the output space
+'''
