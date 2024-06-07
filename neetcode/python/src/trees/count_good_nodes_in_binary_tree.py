@@ -1,4 +1,5 @@
 from src.trees.treenode import TreeNode
+from collections import deque
 
 class Solution:
     def __init__(self):
@@ -27,9 +28,10 @@ class Solution:
 
         count = 0
         maxVal = root.val
-        q = [(root, maxVal)]
+        q = deque()
+        q.append((root, maxVal))
         while q:
-            currNode, maxVal = q.pop(0)
+            currNode, maxVal = q.popleft()
             # if the node is larger than the largest value of its ancestors, 
             # then it is a good node
             if currNode.val >= maxVal:

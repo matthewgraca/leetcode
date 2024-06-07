@@ -1,4 +1,5 @@
 from src.trees.treenode import TreeNode
+from collections import deque
 
 class Solution:
     def __init__(self):
@@ -23,9 +24,10 @@ class Solution:
         if not node:
             return True
 
-        q = [(node, float('-inf'), float('inf'))]
+        q = deque()
+        q.append((node, float('-inf'), float('inf')))
         while q:
-            curr, minAncestor, maxAncestor = q.pop(0)
+            curr, minAncestor, maxAncestor = q.popleft()
 
             # check BST invariant: minAncestor < curr.val < maxAncestor
             if not (minAncestor < curr.val < maxAncestor):

@@ -1,5 +1,6 @@
 from src.trees.treenode import TreeNode
 from typing import List
+from collections import deque
 
 class Solution:
     def __init__(self):
@@ -9,18 +10,19 @@ class Solution:
         if not root:
             return []
 
-        q, res = [root], []
+        q, res = deque(), []
+        q.append(root)
         while q:
             # pop all nodes from q to the current level list, emptying q
-            level = []
+            level = deque()
             while q:
-                level.append(q.pop(0))
+                level.append(q.popleft())
 
             # using the current level list, put all the nodes of the next level into q
             # now q will contain all the nodes in the next level only
             temp = []
             while level:
-                curr = level.pop(0)
+                curr = level.popleft()
                 temp.append(curr.val)
                 if curr.left:
                     q.append(curr.left)

@@ -1,5 +1,6 @@
 from src.trees.treenode import TreeNode
 from typing import List
+from collections import deque
 
 class Solution:
     def __init__(self):
@@ -11,15 +12,16 @@ class Solution:
             return res 
 
         # level-order traversal, but nodes are saved from right -> left
-        q = [root]
+        q = deque()
+        q.append(root)
         while q:
-            currLevel = []
+            currLevel = deque()
             while q:
-                currLevel.append(q.pop(0))
+                currLevel.append(q.popleft())
 
             res.append(currLevel[0].val) # rightmost value on the current level 
             while currLevel:
-                node = currLevel.pop(0)
+                node = currLevel.popleft()
                 if node.right:
                     q.append(node.right)
                 if node.left:
