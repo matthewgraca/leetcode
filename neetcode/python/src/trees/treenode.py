@@ -41,9 +41,7 @@ class TreeNode:
     #       /   \
     #     2i+1 2i+2
     def listOf(self, root: TreeNode) -> List[int]:
-        res = []
-        self.bfs(root, res)
-        return res
+        return self.bfs(root)
 
     # simple dfs, no cycles
     def dfs(self, node: TreeNode, res: List[int]):
@@ -57,10 +55,11 @@ class TreeNode:
         self.dfs(node.right, res)
 
     # simple bfs, no cycles
-    def bfs(self, node: TreeNode, res: List[int]):
+    def bfs(self, node: TreeNode) -> List[int]:
+        res = []
         # empty case
         if not node:
-            return
+            return res
 
         # nonempty case
         queue = deque() 
@@ -72,3 +71,5 @@ class TreeNode:
                 queue.append(temp.left)
             if temp.right:
                 queue.append(temp.right)
+        
+        return res
