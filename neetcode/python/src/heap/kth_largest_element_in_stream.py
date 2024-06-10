@@ -1,20 +1,20 @@
 from typing import List
-import heapq
+from heapq import *
 
 class KthLargest:
     def __init__(self, k: int, nums: List[int]):
         self.minHeap, self.k = nums, k
-        heapq.heapify(self.minHeap)
+        heapify(self.minHeap)
 
         # prune values lower than kth s.t. the top val is the kth largest
         while len(self.minHeap) > self.k:
-            heapq.heappop(self.minHeap)
+            heappop(self.minHeap)
 
     def add(self, val: int) -> int:
-        heapq.heappush(self.minHeap, val)
+        heappush(self.minHeap, val)
         # ensure the top value is the kth largest
         if len(self.minHeap) > self.k:
-            heapq.heappop(self.minHeap)
+            heappop(self.minHeap)
 
         return self.minHeap[0] 
 '''
@@ -29,7 +29,7 @@ trick:
     that are larger than the kth largest; any values that we come across
     that are smaller than that can just go to the trash
 
-    heapq.heappushpop() is nice because:
+    heappushpop() is nice because:
         - if the val is less than or equal to kth, it gets pushed to the top 
             and immediately popped.
         - if the val is greater than kth, it gets pushed and the now k+1th
@@ -40,4 +40,13 @@ trick:
             get rid of the kth value and add a duplicate val.
             - so just push the val, then pop if it grows too large
 
+time: 
+    - heapifying an existing list takes n time
+    - we pop n-k items from the heap; taking (n-k)log(n?) time
+    - in total, initialization costs about nlogn time
+    - as for add(), the heap is size k and each call of push and pop takes logk time.
+        - 2logk per call
+space:
+    - we create a heap of size n that gets trimmed down to size k: so total size is n
+    - add only uses constant space 1
 '''
