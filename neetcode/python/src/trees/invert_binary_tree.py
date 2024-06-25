@@ -9,7 +9,8 @@ class Solution:
         if not root:
             return None
         
-        # swap left and right children 
+        # preorder (top-down) invert children
+        # can also do post-order (bottom-up) inversion
         root.left, root.right = root.right, root.left
 
         # dfs
@@ -17,8 +18,3 @@ class Solution:
         self.invertTree(root.right)
 
         return root 
-'''
-complexity:
-    time: each node is visited once: so if there are n nodes, the answer is O(n)
-    space: O(n) for a degenerate binary tree (every node has just one left child, tantamount to a linked list)
-'''
