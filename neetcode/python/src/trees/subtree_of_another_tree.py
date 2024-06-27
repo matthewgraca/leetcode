@@ -6,42 +6,32 @@ class Solution:
         pass
 
     def isSubtree(self, root: TreeNode, subRoot: TreeNode) -> bool:
-        # find all nodes that share the same root as the subtree using dfs
-        st = [root]
-        while st:
-            node = st.pop()
-            if node.val == subRoot.val:
-                if self.isSameTree(node, subRoot):
-                    return True
-            if node.left:
-                st.append(node.left)
-            if node.right:
-                st.append(node.right)
+        # dfs to compare trees at every node
+        # case 1: subRoot is null; trivially a subtree of root
+        if not subRoot:
+            return True
+        # case 2: subRoot contains more nodes than root; can't be a subtree
+        if not root:
+            return False
+        # case 3: trees are the same at current root
+        if self.isSameTree(root, subRoot):
+            return True
 
-        return False
+        # recursive step -- check left and right subtrees
+        isLeftTreeSameAsSubtree= self.isSubtree(root.left, subRoot)
+        isRightTreeSameAsSubtree = self.isSubtree(root.right, subRoot)
 
-    # determines if one tree is the same tree as another
+        return isLeftTreeSameAsSubtree or isRightTreeSameAsSubtree
+
     def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
-        # same structure base case
         if not p and not q:
             return True
-        # different structure
-        if p and not q or q and not p:
+        if not p or not q:
             return False
+        if p.val != q.val:
+            return False
+        
+        isLeftTreeSame = self.isSameTree(p.left, q.left)
+        isRightTreeSame = self.isSameTree(p.right, q.right)
 
-        # check if current node is the same and left + right trees are the same
-        isSameNode = p.val == q.val
-        isSameLeftTree = self.isSameTree(p.left, q.left)
-        isSameRightTree = self.isSameTree(p.right, q.right)
-
-        return isSameNode and isSameLeftTree and isSameRightTree
-
-'''
-important distinction to be made is all the descendants also have to be the same;
-if tree A has tree B in it, but the descendants are different, they aren't the same
-    1. search for the root of subtree in the tree
-    2. if found, check if same tree
-        - if same tree return true
-        - if not, return false
-    3. if not found, return true
-'''
+        return isLeftTreeSame and isRightTreeSame
