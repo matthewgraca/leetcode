@@ -4,26 +4,17 @@ class Solution:
     def __init__(self):
         pass
 
-    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
-        # same structure base case
+    def isSameTree(self, p: TreeNode, q: TreeNode)-> bool:
+        # case 1: both null
         if not p and not q:
             return True
-        # different structure
-        if p and not q or q and not p:
+        # case 2: one is null, but not the other
+        if not p or not q:
             return False
 
-        # check if current node is the same and left + right trees are the same
-        isSameNode = p.val == q.val
-        isSameLeftTree = self.isSameTree(p.left, q.left)
-        isSameRightTree = self.isSameTree(p.right, q.right)
+        # recursive step: both are nodes and are equal val
+        isRootValSame = p.val == q.val
+        isLeftTreeSame = self.isSameTree(p.left, q.left)
+        isRightTreeSame = self.isSameTree(p.right, q.right)
 
-        return isSameNode and isSameLeftTree and isSameRightTree
-
-'''
-Two criteria:
-    1. structurally identitcal
-    2. nodes have the same value
-
-seems like we can pick our choice in dfs or bfs and just do a 
-pairwise comparison?
-'''
+        return isRootValSame and isLeftTreeSame and isRightTreeSame
