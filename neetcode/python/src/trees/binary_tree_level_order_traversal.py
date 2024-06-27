@@ -9,39 +9,21 @@ class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         if not root:
             return []
-
-        q, res = deque(), []
-        q.append(root)
-        while q:
-            # pop all nodes from q to the current level list, emptying q
-            level = deque()
-            while q:
-                level.append(q.popleft())
-
-            # using the current level list, put all the nodes of the next level into q
-            # now q will contain all the nodes in the next level only
-            temp = []
-            while level:
-                curr = level.popleft()
-                temp.append(curr.val)
-                if curr.left:
-                    q.append(curr.left)
-                if curr.right:
-                    q.append(curr.right)
-            res.append(temp)
+        
+        queue = deque([root])
+        res = []
+        while queue:
+            # only pop nodes in the current level
+            level = []
+            nodesInLevel = len(queue)
+            # run bfs
+            for i in range(nodesInLevel):
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                level.append(node.val)
+            res.append(level)
 
         return res
-'''
-I like this solution more than neetcodes; it's the same but I kind of see the solution better
-
-Time:
-    - n nodes traversed
-    - push a total of n nodes through the queue and the level list
-    - Total: O(n)
-
-Space:
-    - queue and list have, at most, only the the current level's nodes contained.
-        given the binary tree, only 2 nodes in the list at a time
-        - so no matter how large the binary tree is, the queue and the level list doesn't change
-    - O(1) for only constant space used. not including the output space
-'''
