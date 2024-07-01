@@ -7,29 +7,43 @@ class Solution:
     def kthSmallest(self, root: TreeNode, k: int) -> int:
         st = []
         curr, kth = root, root.val
+        
+        # in-order traversal gives smallest node in a bst
         for _ in range(k):
-            # in-order traversal gives smallest node in a bst
+            # go leftmost
             while curr:
                 st.append(curr)
                 curr = curr.left
 
+            # inorder
             kth = st[-1].val
+
+            # go right 1
             curr = st.pop()
             curr = curr.right
+
         return kth 
-'''
-The idea is to incrementally find the smallest node, one at a time.
 
-the trick is that the leftmost node in a bst is the smallest node in the tree.
+    # putting the abstract version of iterative inorder traversal
+    def inorder(self, root, k: int) -> int:
+        if not root:
+            return -1
 
-So to find the next smallest node, you go to the right tree and search for the 
-leftmost node; i.e. in-order traversal
+        st = []
+        curr, kth = root, root.val
+        while st:
+            # go leftmost
+            while curr:
+                st.append(curr)
+                curr = curr.left
 
-continue in this manner k times, and you get the kth smallest node in a bst.
+            # inorderr
+            k -= 1
+            if k == 0:
+                kth = st[-1].val
 
-as for the follow up, i think the answer is simply a min heap.
+            # go right 1
+            curr = st.pop()
+            curr = curr.right
 
-
-if k = n with n being the number of nodes in the tree, then the 
-complexity is O(n).
-'''
+        return kth
