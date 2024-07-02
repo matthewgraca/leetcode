@@ -41,7 +41,3 @@ class Codec:
         node.right = self.deserializeList(data)
 
         return node
-
-'''
-just dfs so O(n), and creation of string is O(n) space
-'''
