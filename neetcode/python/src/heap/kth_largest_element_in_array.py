@@ -1,63 +1,40 @@
 import random
-from heapq import *
-from typing import List
+import heapq
 
 class Solution:
     def __init__(self):
         pass
 
+    # djikstra's dutch flag quickselect (i.e. 3-way quickselect paritioning)
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        kthLargest = len(nums) - k
-        lo, hi = 0, len(nums) - 1
-        while True:
-            # random pivots protect against worst case
-            randPivot = random.randint(lo, hi)
-            pivot = self.partition(nums, lo, hi, randPivot)
-
-            # move to the subarray that has the kth largest value
-            if pivot == kthLargest:
-                return nums[pivot]
-            elif pivot > kthLargest:
-                hi = pivot - 1
+        # choose pivot and construct left, mid, right partitions
+        # just making the paritions instead of indexing since indexing is a pain
+        pivot = random.choice(nums)
+        left, mid, right = [], [], []
+        for num in nums:
+            if num > pivot:
+                left.append(num)
+            elif num < pivot:
+                right.append(num)
             else:
-                lo = pivot + 1
+                mid.append(num)
+        
+        # if k exists in the left partition, go left
+        if len(left) >= k:
+            return self.findKthLargest(left,k)
+        # if k exists in the right partition, go right
+        if len(left) + len(mid) < k:
+            return self.findKthLargest(right, k - len(left) - len(mid))
+        # if k is in the middle partition, kth has been found
+        return pivot
 
-    def heapSol(self, nums: List[int], k: int) -> int:
-        heap = []
-        for val in nums:
-            heappush(heap, val)
-            if len(heap) > k:
-                heappop(heap)
-        return heap[0]
-
-    def partition(self, nums: List[int], lo: int, hi: int, pivot: int) -> int:
-        pivotIdx, pivotVal = lo, nums[pivot]
-        # move true pivot value to end
-        nums[pivot], nums[hi] = nums[hi], nums[pivot]   
-
-        for i in range(lo, hi):
-            # incrementally move smaller values to the left of the pivot index
-            if nums[i] < pivotVal:
-                nums[i], nums[pivotIdx] = nums[pivotIdx], nums[i]
-                pivotIdx += 1
-
-        # recall hi contains the pivot; so swap it with the real pivot idx
-        nums[hi], nums[pivotIdx] = nums[pivotIdx], nums[hi]
-        return pivotIdx 
-
-'''
-The goal is to find the kth largest element in the array, but without
-sorting it first.
-
-use minheap of size k
-- values smaller than kth largest eventually get popped, while 
-    values larger than kth largest stay in the min heap
-- time: nlogk
-    n items get passed into a min heap of size k
-- space: k
-    min heap of size k is maintained
-
-use quickselect until the partition index is the same as the kth index
-    - used to work until lc added a testcase with 50000 duplicates.
-    - can use 3way quickselect, but idc at this point
-'''
+    
+    # heap solution
+    def findKthLargest2(self, nums: List[int], k: int) -> int:
+        minheap = []
+        for num in nums:
+            heapq.heappush(minheap, num)
+            if len(minheap) > k:
+                heapq.heappop(minheap)
+        
+        return minheap[0]
