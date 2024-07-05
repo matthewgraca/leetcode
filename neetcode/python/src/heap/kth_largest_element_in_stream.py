@@ -12,12 +12,9 @@ class KthLargest:
             heapq.heappop(self.minheap)
 
     def add(self, val: int) -> int:
-        # if there are less than k items, just freely add val
-        if len(self.minheap) < self.k:
-            heapq.heappush(self.minheap, val)
-        # if there are k items but the val belongs in the top k, push it and pop the k+1th item
-        elif self.minheap[0] < val:
-            heapq.heappushpop(self.minheap, val)
-        # else the heap is full and val is in the bottom k; just ignore it
+        heapq.heappush(self.minheap, val)
+        # if there are more than k items, pop the smallest items
+        if len(self.minheap) > self.k:
+            heapq.heappop(self.minheap)
 
         return self.minheap[0] 
