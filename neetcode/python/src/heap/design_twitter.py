@@ -66,10 +66,3 @@ class Twitter:
 
     def getPostList(self) -> dict:
         return self.posts
-
-'''
-need to make the tweets of a user sortable (by some time variable)
-
-want to update the users's total feed as they add follows and unfollow
-
-'''
