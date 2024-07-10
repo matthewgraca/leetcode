@@ -63,4 +63,6 @@ When you contruct this decision tree, think about each recursive call being a de
 
 if the stay eventually returns, that means we need to backtrack and make a decision to do the 
     other thing; that includes popping then calling the right path.
+
+looking at neetcode's drawings helps tremendously
 '''
