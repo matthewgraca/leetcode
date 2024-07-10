@@ -48,4 +48,10 @@ curr problem
 - pre order dfs traversal. subset is built in preorder dfs manner, res is built in postorder manner.
 - subset is itself a stack. since we pass the reference it doesn't respond to recursion, so we have 
     to pop it so it follows the recursive calls.
+
+Time:
+O(2^n) - this many combinations generated
+
+space:
+O(2^n) - this many calls on the function stack
 '''
