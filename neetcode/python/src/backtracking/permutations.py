@@ -6,32 +6,41 @@ class Solution:
 
     def permute(self, nums: List[int]) -> List[List[int]]:
         res = []
-        self.backtrack(0, nums, [], res)
+        self.backtrack(nums, set(), [], res)
         return res
 
     def backtrack(
         self,
-        i: int,
         nums: List[int],
+        visited: set,
         permutation: List[int],
         res: List[List[int]]
     ) -> None:
-        # base case
-        # copy valid permutation
+        # check solution
         if len(permutation) == len(nums):
             res.append(permutation.copy())
             return
-        # backtrack when no nums left to take from 
-        if i >= len(nums):
-            return
         
-        # dfs recursive step
-        permutation.append(nums[i])
-        self.backtrack(i + 1, nums, permutation, res)
-        permutation.pop()   # backtrack
-        self.backtrack(i + 1, nums, permutation, res)
+        # check each position
+        # e.g. build all solutions starting from 1, then all solutions from 2, etc..
+        for num in nums:
+            # promising function
+            if num not in visited:
+                # pre order
+                visited.add(num)
+                permutation.append(num)
+
+                self.backtrack(nums, visited, permutation, res)
+
+                # post order
+                permutation.pop()
+                visited.remove(num)
+            # not promising if visited already, check next num
+        # every num checked; backtrack
         return
 
 '''
 instead try to pick from nums by removing values from nums??
+
+idk man
 '''
