@@ -5,15 +5,22 @@ class Solution:
         pass
 
     def exist(self, board: List[List[int]], word: str) -> bool:
-        return self.checkNode(board, 0, 0, 0, word) 
+        # check every path starting from (i,j)
+        m, n = len(board), len(board[0])
+        for i in range(0, m):
+            for j in range(0, n):
+                if self.checkNode(board, word, 0, i, j):
+                    return True
+        return False
 
+    # checks if a path starting from x,y is valid
     def checkNode(
         self,
         board: List[List[int]],
+        word: str,
         i: int,
         x: int,
-        y: int,
-        word: str
+        y: int
     ) -> bool:
         m, n = len(board), len(board[0])
         # solution found: word scan completed
@@ -21,14 +28,16 @@ class Solution:
             return True 
 
         # check curr node
-        if self.validNode(i, x, y, board, word):
+        if self.validNode(board, word, i, x, y):
             visitedNode = board[x][y]
+            board[x][y] = "" # mark node as visited
             # check neighbors
             validNeighbor = (
-                self.checkNode(board, i+1, x+1, y, word) or
-                self.checkNode(board, i+1, x, y+1, word) or 
-                self.checkNode(board, i+1, x, y-1, word) or
-                self.checkNode(board, i+1, x-1, y, word) 
+                # right, down, left, up
+                self.checkNode(board, word, i+1, x+1, y) or
+                self.checkNode(board, word, i+1, x, y+1) or 
+                self.checkNode(board, word, i+1, x-1, y) or
+                self.checkNode(board, word, i+1, x, y-1) 
             )
             # path from x,y failed; backtrack and unvisit nodes
             board[x][y] = visitedNode
@@ -39,19 +48,17 @@ class Solution:
     # determine if a node is valid
     def validNode(
         self, 
+        board: List[List[int]], 
+        word: str,
         i: int,
         x: int, 
-        y: int, 
-        board: List[List[int]], 
-        word: str
+        y: int
     ) -> bool:
-        # in bounds and letter found and not visited, it's a valid node
         m, n = len(board), len(board[0])
-        inBounds = x < m and y < n and x >= 0 and y >= 0
-        if inBounds and board[x][y] == word[i] and not board[x][y] == "":
-            board[x][y] = "" # mark node as visited
-            return True
-        return False
+        return(
+            x < m and y < n and x >= 0 and y >= 0 and # indices in-bounds
+            board[x][y] == word[i] # letter in word matches letter on board
+        )
 
 '''
 ideas:

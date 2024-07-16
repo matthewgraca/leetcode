@@ -12,3 +12,14 @@ class WordSearchTest(unittest.TestCase):
         actual = Solution().exist(board, word)
         expected = True
         self.assertTrue(actual, expected)
+
+    def test_example2(self):
+        board = [
+            ["A","B","C","E"],
+            ["S","F","C","S"],
+            ["A","D","E","E"]
+        ]
+        word = "SEE"
+        actual = Solution().exist(board, word)
+        expected = True
+        self.assertTrue(actual, expected)
