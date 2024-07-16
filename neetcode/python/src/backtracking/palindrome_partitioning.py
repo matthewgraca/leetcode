@@ -44,21 +44,26 @@ A partition of s makes up one group:
 The goal is to find every group whose elements are palindromic:
     -which is: ["aa", "b"], ["a", "b", "b"]
 
-1. calculate every partition of s
-2. determine if every element in a given partition is palindromic
-    -if yes, add to result
-
-seems like raw dfs; i don't see how backtracking will work here?
-A substring that is not palindromic can later become palindromic
-A subtring that is palidromic can later become non-palindromic
-
-There doesn't seem to be a way to fail-fast and backtrack
-
-Though rechecking if a substring is palindromic seems expensive;
-    -if palindromic and we add a letter, that makes it non-palindromic, no?
-        -unless all the letters are the same
-
-Actually, we just need to check if the incoming letter is the same as the beginning letter?
-    -no need to make a palindrome function.
-    - well b/c of partitioning it is better to just make a palindrome func
+The trace:
+start loop
+    - check a. is palindrome, add to partition
+        - check a. is palindrome, add to partition
+            - check b. is palindrome, add to partition
+                - end of s reached, add partitions to res
+                - b is popped
+                - end of loop. backtrack
+            - a is popped.
+            - end of loop. backtrack
+        - check ab. is not palindrome
+            - end of loop. backtrack
+        - end of loop. backtrack
+    - check aa. is palindrome, add to partition
+        -check b. is palindrome, add to partition
+            -end of s reached; add partition to res
+            - b is popped
+            - end of loop. backtrack
+        - end of loop. backtrack
+    - check aab. is not palindrome. backtrack
+    - end of loop
+end loop
 '''
