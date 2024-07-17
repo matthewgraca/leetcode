@@ -70,6 +70,12 @@ class Solution:
         mainDiag.remove(row - col)
         columns.remove(col)
 '''
+Got tripped up by the for loop; i backtracked instead of just skipping the invalid child. 
+this prevented me from checking the rest of the children; the backtracking where non of the children are valid
+is handled by the return statement at the outside of the for loop
+    - this is a pattern that you should pick up -- check the children, if they fail, just skip them;
+        - if all the children fail, you'll hit the end of the function and you'll backtrack to the parent.
+
 thrw this away b/c it don work and there's an interesting quirk of diagonals we can abuse
 that is, the "main diagonal" of a matrix (top left to bottom right) are the same values
 when subtracted from each other
