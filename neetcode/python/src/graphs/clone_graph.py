@@ -6,22 +6,26 @@ class Solution:
 
     def cloneGraph(self, node: Node) -> Node:
         # maps old graph to copied graph nodes
-        originalToCopy = {}
-        return self.dfs(node, originalToCopy) if node else None
+        visited = {}
+        return self.dfs(node, visited)
 
-    def dfs(self, node: Node, originalToCopy: dict) -> Node:
+    def dfs(self, node: Node, visited: dict) -> Node:
+        # base case: null returns null
+        if not node:
+            return None
         # if already visited, backtrack
-        if node in originalToCopy:
-            return originalToCopy[node]
+        if node in visited:
+            return visited[node]
 
         # preorder traversal - make copy
         copy = Node(node.val)
-        originalToCopy[node] = copy
+        visited[node] = copy
 
-        # dfs
-        for neighbor in node.neighbors:
-            copy.neighbors.append(self.dfs(neighbor, originalToCopy))
+        # dfs on neighbors
+        for edge in node.neighbors:
+            copy.neighbors.append(self.dfs(edge, visited))
 
+        # return copy after all neighbors copied
         return copy
 
 '''
