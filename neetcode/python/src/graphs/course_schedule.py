@@ -33,9 +33,10 @@ class Solution:
         for childCourse in children:
             if not self.dfs(prereqMap, childCourse, visited):
                 return False
-        # valid path found; unvisit and remove that path
+        # valid path found
+        # remove path; we already know it's valid, avoid traversing again
         visited.remove(course)
-        prereqMap[course] = []
+        prereqMap[course] = [] 
 
         return True
 
