@@ -19,10 +19,11 @@ class Solution:
             return False
 
         visited.add(currNode)
-        for neighbor in adjMap[currNode]:
+        # visit current node's neighbors
+        for nextNode in adjMap[currNode]:
             # we allow neighbors to point back to prev node, but not cycles
-            if prevNode != neighbor:
-                if not self.dfs(currNode, neighbor, adjMap, visited):
+            if prevNode != nextNode:
+                if not self.dfs(currNode, nextNode, adjMap, visited):
                     return False
 
         return True
