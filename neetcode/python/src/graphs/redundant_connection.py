@@ -60,4 +60,11 @@ time:
     a potential max of n times. however, it is run on an adjacency list
     that grows from 1 to n -- so it looks like this:
         1 * 1 + 1 * 2 + 1 * 3 + ... + 1_n * n = 1 + 2 + ... + n = n^2
+    in the context of the graph, E edges and V vertices,
+        each edge has dfs run on it, which takes V time
+        1_e + 1_v + 1_e + 2_v + ... + 1_e + n_v = V^2; meaning dfs is run E times as V grows linearly.
+    O(V^2) where V is the number of vertices
+space:
+    O(E). Each edge generates an extra entry in the adj map, or two if both
+        vertices are not present in the matrix yet.
 '''
