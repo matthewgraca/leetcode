@@ -24,23 +24,14 @@ class Solution:
         # check each position
         # e.g. build all solutions starting from 1, then all solutions from 2, etc..
         for num in nums:
-            # promising function
+            # promising if num not visited 
             if num not in visited:
-                # pre order
                 visited.add(num)
                 permutation.append(num)
-
                 self.backtrack(nums, visited, permutation, res)
-
-                # post order
                 permutation.pop()
                 visited.remove(num)
-            # not promising if visited already, check next num
-        # every num checked; backtrack
+            # if visited already, just check next num
+        # every num checked; no solution at this point; backtrack
         return
 
-'''
-instead try to pick from nums by removing values from nums??
-
-idk man
-'''
