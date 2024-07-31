@@ -17,15 +17,15 @@ class Solution:
         combo: List[int], 
         res: List[List[int]]
     ) -> None:
-        # non promising
-        if i >= len(candidates) or currSum > target:
-            return
-                    
         # solution
         if currSum == target:
             res.append(combo.copy())
             return
 
+        # non promising
+        if i >= len(candidates) or currSum > target:
+            return
+                    
         # currSum < target = promising path
         currSum += candidates[i]
         combo.append(candidates[i])
