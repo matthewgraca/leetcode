@@ -1,8 +1,7 @@
 class TrieNode:
     def __init__(self):
         self.endOfWord = False
-        self.children = {} 
-
+        self.children = {}
 class WordDictionary:
     def __init__(self):
         self.root = TrieNode()
@@ -14,28 +13,28 @@ class WordDictionary:
                 curr.children[char] = TrieNode()
             curr = curr.children[char]
         curr.endOfWord = True
+        return 
 
     def search(self, word: str) -> bool:
-        return self.dfs(0, word, self.root)
-
-    def dfs(self, i: int, word: str, curr: TrieNode) -> bool:
-        # scan complete; check if the word is in the trie
-        if i == len(word):
+        return self.dfs(self.root, word, 0)
+    
+    def dfs(self, curr: TrieNode, word: str, i: int) -> bool:
+        # scan of search key finished; check if it is a valid word in the trie
+        if i >= len(word):
             return curr.endOfWord
 
-        # if char is wildcard, search through all children
-        char = word[i]
-        if char == '.':
-            # find a child who search hits
+        # if wildcard, check all children
+        if word[i] == ".":
             for child in curr.children.values():
-                if self.dfs(i + 1, word, child):
+                if self.dfs(child, word, i + 1):
                     return True
-            # if no child succeeds, search missed 
+        # if regular character, normally traverse
+        elif word[i] in curr.children:
+            if self.dfs(curr.children[word[i]], word, i + 1):
+                return True
+        # not a wildcard and char not in trie
+        else:
             return False
-
-        # char in trie; continue search
-        if char in curr.children:
-            return self.dfs(i + 1, word, curr.children[char])
-
-        # char not in trie; search miss
+        
+        # dfs failed on children
         return False
