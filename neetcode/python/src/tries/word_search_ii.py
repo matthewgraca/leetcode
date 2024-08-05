@@ -2,8 +2,8 @@ from typing import List
 
 class TrieNode:
     def __init__(self):
-        self.children = {} # char: TrieNode
         self.endOfWord = False
+        self.children = {}
 
     def addWord(self, word: str) -> None:
         curr = self
@@ -13,82 +13,88 @@ class TrieNode:
             curr = curr.children[char]
         curr.endOfWord = True
 
-class Solution:
-    def __init__(self):
-        pass
+        return
 
+    def removeWord(self, word: str) -> None:
+	    # get the path of the word in the trie
+        curr = self
+        nodeStack = []
+        for char in word:
+            nodeStack.append((curr, char))
+            curr = curr.children[char]
+	    # remove the nodes from the trie if they're childless
+	    # if they have children, exit; this path needs to exist for other keys
+        while nodeStack:
+            parentNode, char = nodeStack.pop()
+            childNode = parentNode.children[char]
+            if not childNode.children:
+                del parentNode.children[char]
+            else:
+                return
+
+        return
+
+class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
-        # create trie of the search keys
+        # put search keys in words into a trie
         root = TrieNode()
         for word in words:
             root.addWord(word)
-
-        # check every path starting from (i,j)
+        
+        # run dfs on matrix in parallel with trie to search
         res = []
-        rows, cols  = len(board), len(board[0])
-        for row in range(0, rows):
-            for col in range(0, cols):
-                self.checkNode(board, [], root, row, col, res)
-        return res 
+        for row in range(len(board)):
+            for col in range(len(board[0])):
+                self.dfs(root, root, board, "", row, col, set(), res)
+        
+        return res
 
-    # checks if a path starting from x,y is valid
-    def checkNode(
+    def dfs(
         self,
-        board: List[List[int]],
-        word: List[str],
-        trieNode: TrieNode,
-        x: int,
-        y: int,
-        res: set()
-    ) -> bool:
-        # if node is not valid, backtrack
-        if not self.validNode(board, trieNode, x, y):
+        root: TrieNode, 
+        node: TrieNode,
+        board: List[List[str]], 
+        word: str, 
+        row: int,
+        col: int,
+        visited: set,
+        res: List[str]
+    ) -> None:
+        # key scan finished; word found
+        if node.endOfWord:
+            res.append(word)
+            node.endOfWord = False
+            root.removeWord(word)
+            # don't return; there may be more words on this path
+
+        # current node not promising; backtrack
+        if not self.promising(node, board, row, col, visited):
             return
 
-        # check curr node
-        visitedNode = board[x][y]
-        board[x][y] = "" # mark node as visited
-        trieNode = trieNode.children[visitedNode]
-        word.append(visitedNode)
-        if trieNode.endOfWord:
-            res.append("".join(word))
-            trieNode.endOfWord = False
+        # traverse trie in parallel with matrix dfs
+        visited.add((row, col))
+        word += board[row][col]
+        node = node.children[board[row][col]]
 
-        # check neighbors
-        # right, down, left, up
-        self.checkNode(board, word, trieNode, x+1, y, res) 
-        self.checkNode(board, word, trieNode, x, y+1, res) 
-        self.checkNode(board, word, trieNode, x-1, y, res) 
-        self.checkNode(board, word, trieNode, x, y-1, res) 
+        # dfs
+        directions = [(0,1), (1,0), (0,-1), (-1,0)]
+        for dr, dc in directions:
+            r, c = row + dr, col + dc
+            self.dfs(root, node, board, word, r, c, visited, res)
+        visited.remove((row, col))
 
-        # path from x,y failed; backtrack and unvisit nodes
-        word.pop()
-        board[x][y] = visitedNode
+        return
 
-        # invalid node or no solution; backtrack
-        return 
-
-    # determine if a node is valid:
-    # x,y is in bounds and letter is in the trie
-    def validNode(
-        self, 
-        board: List[List[int]], 
-        trieNode: TrieNode,
-        x: int, 
-        y: int
+    def promising(
+        self,
+        node: TrieNode,
+        board: List[List[int]],
+        row: int,
+        col: int,
+        visited: set
     ) -> bool:
-        m, n = len(board), len(board[0])
-        return(
-            x < m and y < n and x >= 0 and y >= 0 and 
-            board[x][y] in trieNode.children
+        return (
+            row >= 0 and col >= 0 and row < len(board) and col < len(board[0]) and
+            (row, col) not in visited and
+            board[row][col] in node.children
         )
-
-'''
-The best way i can describe this is this is the word search backtracking problem, 
-but we change the conditions for what makes a success/fail that requires a backtrack
-
-we search the matrix in tandem with a trie of the search keys.
-
-if the word is in the trie, we append to the solution
-if the word is not in the trie, we backtrack the matrix dfs 
-'''
