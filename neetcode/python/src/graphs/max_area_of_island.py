@@ -6,29 +6,32 @@ class Solution:
 
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         maxCount = 0
-        rows, cols = len(grid), len(grid[0])
-        for row in range(rows):
-            for col in range(cols):
+        ROWS, COLS = len(grid), len(grid[0])
+        for row in range(ROWS):
+            for col in range(COLS):
                 if grid[row][col] == 1:
-                    maxCount = max(maxCount, self.dfs(grid, row, col))
+                    maxCount = max(self.dfs(grid, row, col), maxCount)
         return maxCount
 
     def dfs(self, grid: List[List[int]], row: int, col: int) -> int:
-        rows, cols = len(grid), len(grid[0])
-        # if not in-bound, backtrack
-        if row < 0 or row >= rows or col < 0 or col >= cols:
+        if not self.promising(grid, row, col):
             return 0
-        # if not an island or already visited, backtrack
-        if grid[row][col] == 0:
-            return 0
-
-        # dfs; mark current node as visited
+        
         grid[row][col] = 0
-        count = 1 + (
-            self.dfs(grid, row - 1, col) +
-            self.dfs(grid, row + 1, col) +
-            self.dfs(grid, row, col - 1) +
-            self.dfs(grid, row, col + 1)
-        )
-
+        directions = [(0,1), (0,-1), (1,0), (-1,0)]
+        count = 1
+        for dr, dc in directions:
+            r, c = row + dr, col + dc
+            count += self.dfs(grid, r, c)
+        
         return count
+
+    def promising(self, grid: List[List[int]], row: int, col: int) -> bool:
+        ROWS, COLS = len(grid), len(grid[0])
+        return (
+            # indices in range
+            row >= 0 and col >= 0 and
+            row < ROWS and col < COLS and
+            # island encountered
+            grid[row][col] == 1
+        )
