@@ -23,23 +23,14 @@ class Solution:
             return
         
         # recursive step
-        # subset containing every num 
+        # left tree: running index
         subset.append(nums[i])
         self.checkNode(i + 1, nums, subset, res)
         subset.pop()
 
-        # subsets skipping duplicates
+        # instead of using the next index over,
+        # scan over the duplicates so a unique value is used in our right tree 
         while i + 1 < len(nums) and nums[i] == nums[i + 1]:
             i += 1
         self.checkNode(i + 1, nums, subset, res)
         return
-
-'''
-option 1:
-    res = set of lists
-option 2:
-    set of unique nodes
-
-time: nlgn + n^n
-space: 
-'''

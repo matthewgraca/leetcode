@@ -48,20 +48,3 @@ class Solution:
         }
 
         return d
-
-'''
-iteration 1 has combo be a string using string concatentation:
-    - res.append(combo) -> res.append(''.join(combo))
-    - combo += letter -> combo.append(letter)
-    - combo = [:-1] -> combo.pop()
-
-join < concatenation in speed because strings are immutable. every
-concatenation creates a new string from the two strings being combined.
-
-meanwhile, joining is like adding a pointer to the end of the first string
-    - so for a string n and k, concatentation is O(nk)
-        - for k strings, it becomes quadratic.
-    - for join, if k is the number of strings in the array, then join is O(nlogk)
-        - that's because it's merging pairwise; see merging k-sorted lists
-    tldr see the article i wrote about merging k sorted lists, this is that exact problem
-'''
