@@ -30,7 +30,7 @@ class Solution:
                 for dr, dc in directions:
                     row, col = r + dr, c + dc
                     # in range and fresh -> propagate rot
-                    if self.indexInRange(grid, row, col) and grid[row][col] == 1:
+                    if self.promising(grid, row, col):
                         grid[row][col] = 2
                         queue.append((row, col))
                         fresh -= 1
@@ -39,32 +39,10 @@ class Solution:
         # need to account for when there are still fresh oranges remaining. set?
         return time if not fresh else -1
 
-    def indexInRange(self, grid: List[List[int]], row: int, col: int) -> bool:
-        return row >= 0 and col >= 0 and row < len(grid) and col < len(grid[0])
-'''
-all adjacent cells rotting at once implies a bfs
+    def promising(self, grid: List[List[int]], row: int, col: int) -> bool:
+        return (
+            row >= 0 and col >= 0 and 
+            row < len(grid) and col < len(grid[0]) and
+            grid[row][col] == 1
+        )
 
-we need to gather all the places with a rotten orange, then propagate them
-at once.
-    - loop and find all rotten orange positions
-    - do bfs, swapping adjacent 2s -> 1s
-'''
-
-'''
-                if c - 1 >= 0 and grid[r][c - 1] == 1:
-                    grid[r][c - 1] = 2
-                    queue.append((r, c - 1))
-                    fresh -= 1
-                if c + 1 < cols and grid[r][c + 1] == 1:
-                    grid[r][c + 1] = 2
-                    queue.append((r, c + 1))
-                    fresh -= 1
-                if r - 1 >= 0 and grid[r - 1][c] == 1:
-                    grid[r - 1][c] = 2
-                    queue.append((r - 1, c))
-                    fresh -= 1
-                if r + 1 < rows and grid[r + 1][c] == 1:
-                    grid[r + 1][c] = 2
-                    queue.append((r + 1, c))
-                    fresh -= 1
-'''
