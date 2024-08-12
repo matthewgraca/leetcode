@@ -4,7 +4,6 @@ class Solution:
     def __init__(self):
         pass
 
-
     def findOrder(
         self, 
         numCourses: int, 
