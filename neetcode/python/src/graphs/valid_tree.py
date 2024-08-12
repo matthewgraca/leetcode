@@ -5,42 +5,28 @@ class Solution:
         pass
 
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        adjMap = {i : [] for i in range(n)}
+        # adjacency list from the list of edges; create undirected graph
+        adj = {i : [] for i in range(n)}
         for a, b in edges:
-            adjMap[a].append(b)
-            adjMap[b].append(a)
+            adj[a].append(b)
+            adj[b].append(a)
         
-        visited = set()
-        return self.dfs(-1, 0, adjMap, visited) and n == len(visited)
-
-    def dfs(self, prevNode: int, currNode: int, adjMap: dict, visited: set) -> bool:
-        # if already visited, then a cycle exists; return False
-        if currNode in visited:
+        # run dfs arbitrarily at node 0; we're just checking for two things:
+        # 1. cycles
+        # 2. connected
+        # for both, where we start in an undirected graph doesn't matter
+        visit = set()
+        return self.dfs(-1, 0, adj, visit) and len(visit) == n
+        
+    # dfs that returns false if an undirected graph contains a cycle, true if not
+    def dfs(self, prev: int, curr: int, adj: dict, visit: set) -> bool:
+        if curr in visit:
             return False
-
-        visited.add(currNode)
-        # visit current node's neighbors
-        for nextNode in adjMap[currNode]:
-            # we allow neighbors to point back to prev node, but not cycles
-            if prevNode != nextNode:
-                if not self.dfs(currNode, nextNode, adjMap, visited):
-                    return False
+        
+        visit.add(curr)
+        for neighbor in adj[curr]:
+            # adjacent nodes aren't considered cycles, so skip them
+            if prev != neighbor and not self.dfs(curr, neighbor, adj, visit):
+                return False
 
         return True
-
-
-'''
-I assume that by "valid tree", they mean a graph with no cycles?
-i think it may be as simple as dfs on the adjacency matrix with a visited
-set.
-
-after a valid path is written, we can delete that path to prevent retreading
-already valid paths
-
-the annoying thing is the nested list contains the node itself as well;
-so this is not a classic adjacency list with the index being the node,
-rather simply a list that describes how the nodes are connected.
-
-so the conditions for traversal:
-    - it's ok if the prevNode is the same as the next node (not a cycle)
-'''
